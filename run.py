@@ -202,7 +202,7 @@ if __name__ == '__main__':
     # 清理无效data
     md5s = []
     for file in os.listdir(os.path.join(root_path, 'poc')):
-        if not file.endswith('.py') and file in ['run.py', '__init__.py']:
+        if not file.endswith('.py') and file in ['run.py', '__init__.py', 'init.py','test.py']:
             continue
         md5 = hashlib.md5(
             open(os.path.join(root_path, 'poc', file), 'rb').read()).hexdigest()
