@@ -649,194 +649,194 @@
         "from": "https://github.com/jstang9527/aquaman",
         "up_time": "2022-12-19 04:11:50"
     },
-    "a7965204cc144e4ffd9a91a19291db20": {
+    "cae845d24bc6761ec14d0d9756ae2d6a": {
+        "name": "SpringCloudConfig_CVE-2019-3799.py",
+        "from": "https://github.com/rouze-d/pocsuite3-pocs",
+        "up_time": "2023-01-09 04:11:43"
+    },
+    "a718979bbf0d1b1e6e9bf0658b0dfe19": {
+        "name": "SpringWebFlow_RCE_CVE-2017-4971.py",
+        "from": "https://github.com/rouze-d/pocsuite3-pocs",
+        "up_time": "2023-01-09 04:11:43"
+    },
+    "40ddde29ad91a670090308a1b8cf1872": {
         "name": "_190528_WebLogic_wls_CVE_2016_3510_RCE.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "0f5865ec280aa466ac4e513890b46ef0": {
+    "a0396c3ea92c189163e6e3c4405ac14b": {
         "name": "_190528_WebLogic_wls_CVE_2016_0638_RCE.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "16cdeeb5bb0bfb0ae7d6866bd7a5a50d": {
+    "de2d1fb4a3965cce70b2e1154fdded8f": {
         "name": "_190528_ThinkPHP5_Information_disclosure.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "a2723ef0b5a8c60982bce8c2ee31206d": {
+    "da4f96a2f380172fb31349278477f56f": {
         "name": "_190528_openssl_heartbleed_1_0_1_info.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "513f80beb3f7670bce0bb3ca92481040": {
+    "b34ac362a641fa3492ac92dbfd0dbed7": {
         "name": "_190528_apple_macintosh_os_x_ds_store_information_disclosure.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "8be688abca97365ecd99153e807675ee": {
+    "066959cfd70b6d2e836820b0d2b2911e": {
         "name": "_190528_ThinkPHP5_5_0_23_RCE.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "37dd49197a592f147d653c276fcb09d7": {
+    "b07347f7834d39f9c7c47666b64a46d0": {
         "name": "_190528_struts2_045_exec.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "450427d1b15ecbf6fdb3f6f39684ff89": {
-        "name": "_190528_phpMyAdmin_all_weak_password.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
-    },
-    "9df340b6e27b4e152b9a8ab77b0458f2": {
+    "39c39f070ffe6212d1d61053d3ce0141": {
         "name": "_190528_Redis_all_unauthorized.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "fd20a0a54e3e579d83a22b86662b82d2": {
+    "406d857d69b5ab367df4cbc90ab271f6": {
         "name": "_190528_thinkphp5__5_0_5_1_execute.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "b5913fd990d07195f467e604b6d81768": {
+    "3e55e030aedf278abcf8d706e662e11d": {
         "name": "_190528_Struts2_057_RCE.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "ff598eb9661815be4c5ffa2e92512e62": {
+    "622b6bc28d86a48c0af19a7a9adefaff": {
         "name": "_190528_iis_ms15_034_exec.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "3a8ed053deeffcf2cdfe55a0936dc8ae": {
+    "6ab86b49a07664cb2ef0acea809f1e62": {
         "name": "_190528_ThinkPHP5_RCE.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "e2d2d28d1446aefb4c880fe4c22c7bbf": {
-        "name": "_190528_Zabbix_303_SQL_Injection.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
-    },
-    "153ecc234d28f4abbbe17236fd83569d": {
+    "82997f135f8c3f755a0d85a763361cd5": {
         "name": "_190528_struts2_048_execution.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "1f71e02c93ee230ec10f421e68083e6c": {
+    "05dabcb2fb0f25f279aed3b417f5b1c7": {
         "name": "_190528_wordpress_core_4_6_rce.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-01-02 04:11:17"
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "9ce29e119a2fb1347cac58cffbc51c21": {
-        "name": "_190528_Weblogic_File_Upload.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-01-02 04:12:29"
+    "cdda13e4d836cea715199e55bb9cf992": {
+        "name": "_180612_180418_WebLogic_wls_all_RCE.py",
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-01-09 04:13:20"
     },
-    "f6cf745c0ffaca6cff48dff3b4bfb0bb": {
-        "name": "_190528_elasticsearch_exec.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-01-02 04:12:29"
+    "d5d8b87f9ea75aa50ee17b95300660e9": {
+        "name": "Zabbix_303_SQL_Injection.py",
+        "from": "https://github.com/trhacknon/pocsuite3-pocs",
+        "up_time": "2023-01-09 04:13:21"
     },
-    "ca047c333396cbd333e344141cde09cd": {
-        "name": "_190528_WebLogic_wls_all_RCE.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-01-02 04:12:29"
+    "04ed52c346daa5a42b6973198848f534": {
+        "name": "maccms_backdoor.py",
+        "from": "https://github.com/co0ontty/pocdb",
+        "up_time": "2023-01-09 04:13:51"
     },
-    "e8d65e35a8ad9ee6f8123309074e972d": {
-        "name": "_190528_detect_doublepulsar.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-01-02 04:12:29"
-    },
-    "19340968292bd4c0427d796e0b44e25a": {
+    "770ceaf5c552c8d3f47541f764a3ef47": {
         "name": "cve_2018_5955.py",
         "from": "https://github.com/co0ontty/pocdb",
-        "up_time": "2023-01-02 04:12:32"
+        "up_time": "2023-01-09 04:13:51"
     },
-    "fcf3a103e23d67cca433333b7fff1963": {
+    "938082c70ea13030ca0e68909f78e46f": {
         "name": "apache_flink_rce.py",
         "from": "https://github.com/co0ontty/pocdb",
-        "up_time": "2023-01-02 04:12:32"
+        "up_time": "2023-01-09 04:13:51"
     },
-    "c3ff8379d17d222c3b1c0def74d37c36": {
+    "047686719da4c36389d7db59839ae905": {
         "name": "cve_2019_2725.py",
         "from": "https://github.com/co0ontty/pocdb",
-        "up_time": "2023-01-02 04:12:32"
+        "up_time": "2023-01-09 04:13:51"
     },
-    "5536364ae3330842ac28004c6024b43b": {
-        "name": "SpringCloudConfig_CVE-2019-3799.py",
-        "from": "https://github.com/trhacknon/pocsuite3-pocs",
-        "up_time": "2023-01-02 04:12:37"
-    },
-    "7ef1f4d3fbc3b257c96ff59d0248643b": {
-        "name": "_180612_170605_SMB_ms17_010_RCE.py",
-        "from": "https://github.com/cocoflan/Fuxi-Scanner",
-        "up_time": "2023-01-02 04:13:11"
-    },
-    "abf4c53ad6ecf3a9bcae0a2edaba0ccb": {
-        "name": "_180612_180418_WebLogic_wls_all_RCE.py",
-        "from": "https://github.com/cocoflan/Fuxi-Scanner",
-        "up_time": "2023-01-02 04:13:11"
-    },
-    "29331f4265a3236aacad54ebced6fa63": {
-        "name": "maccms_backdoor.py",
-        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
-        "up_time": "2023-01-02 04:15:09"
-    },
-    "6be57ea1c17af1488adcb8bf488ca1ee": {
-        "name": "thinkphp_rce_5.py",
-        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
-        "up_time": "2023-01-02 04:15:09"
-    },
-    "cbcfab8480ec5a913a921ec8ea1c54e6": {
+    "420ab9d5da7ead83f063ee44b71be575": {
         "name": "Spring_Cloud_Config_Directory_traversal.py",
         "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
-        "up_time": "2023-01-02 04:15:09"
+        "up_time": "2023-01-09 04:14:23"
     },
-    "c244e1f86b9d89ff8b860bc040c8ae50": {
+    "7c2b50c7b3a20af722ba9b768faf53fb": {
+        "name": "thinkphp_rce_5.py",
+        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
+        "up_time": "2023-01-09 04:14:23"
+    },
+    "60f153062bfc8ab17128d9e2c829cdf6": {
+        "name": "_180612_170605_SMB_ms17_010_RCE.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-01-09 04:15:26"
+    },
+    "a4d4bc20e170a28db71aa72e6e97f0fc": {
+        "name": "_190528_phpMyAdmin_all_weak_password.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-01-09 04:15:26"
+    },
+    "3140e740148f37457c72bfa2cc177c12": {
+        "name": "_190528_WebLogic_wls_all_RCE.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-01-09 04:15:26"
+    },
+    "8fba6e0dac4983c5b9ae20dad660ff19": {
+        "name": "_190528_Zabbix_303_SQL_Injection.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-01-09 04:15:26"
+    },
+    "38d814f4b7922b51409d719087db89b7": {
         "name": "WebLogic_190528_wls_CVE_2016_0638_RCE.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-01-02 04:18:27"
+        "up_time": "2023-01-09 04:15:26"
     },
-    "a81ba73a9b2788fa3c6b15bb80cb3177": {
+    "990b34a706afd42bcc969823ac7cb89b": {
         "name": "WebLogic_180612_180418_wls_all_RCE.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-01-02 04:18:27"
+        "up_time": "2023-01-09 04:15:26"
     },
-    "692c5e231475f48a41c8632701041781": {
+    "55297680a0f96f1b3425b41c772ef190": {
         "name": "WebLogic_190528_wls_CVE_2016_3510_RCE.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-01-02 04:18:27"
+        "up_time": "2023-01-09 04:15:26"
     },
-    "1e17bcb484bcee9828de517326dbf40b": {
+    "c9fe096ff52f231cf021a1c30fbb9b83": {
         "name": "SMB_180612_170605_ms17_010_RCE.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-01-02 04:18:27"
+        "up_time": "2023-01-09 04:15:26"
     },
-    "4d4935421ca9e6649ac57656bb49d544": {
+    "0cd3121a346dab7baed737b4f3d8af73": {
         "name": "MongoDB_190528_Unauthorized.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-01-02 04:18:27"
+        "up_time": "2023-01-09 04:15:26"
     },
-    "5bb01a77ad779794f88e6be9700cb75e": {
+    "28ba78d86fd272c9222efe2759a99b08": {
+        "name": "_190528_Weblogic_File_Upload.py",
+        "from": "https://github.com/shuanx/Penetration-Tools",
+        "up_time": "2023-01-09 04:15:49"
+    },
+    "e0be38622ced3d4dd7e0b5bf68f1b75f": {
+        "name": "_190528_elasticsearch_exec.py",
+        "from": "https://github.com/shuanx/Penetration-Tools",
+        "up_time": "2023-01-09 04:15:49"
+    },
+    "5c23cc5c7fd1949cff920500d27bf11f": {
+        "name": "_190528_detect_doublepulsar.py",
+        "from": "https://github.com/shuanx/Penetration-Tools",
+        "up_time": "2023-01-09 04:15:49"
+    },
+    "fe582161ee6adec71db713b192246690": {
         "name": "poc.py",
-        "from": "https://github.com/leisurelicht/Pocsuite3",
-        "up_time": "2023-01-02 04:19:02"
+        "from": "https://github.com/imjdl/scanner",
+        "up_time": "2023-01-09 04:15:55"
     },
-    "8042763d47d67c261e647d9d93f8fb1c": {
-        "name": "SpringWebFlow_RCE_CVE-2017-4971.py",
-        "from": "https://github.com/aideyisu/CTF",
-        "up_time": "2023-01-02 04:19:37"
-    },
-    "577bcec243df2a85e5cffe72cf1b28db": {
+    "e030e7ca006fa023ef98f9dd62babc25": {
         "name": "settings.py",
-        "from": "https://github.com/Fangrn/pocsuite3",
-        "up_time": "2023-01-02 04:20:02"
-    },
-    "c63c7cf40ce89fab965133086d7ccac7": {
-        "name": "Zabbix_303_SQL_Injection.py",
-        "from": "https://github.com/Pontusec/pocsuite3",
-        "up_time": "2023-01-02 04:21:44"
+        "from": "https://github.com/webvul/pocsuite-mydev",
+        "up_time": "2023-01-09 04:16:12"
     }
 }
