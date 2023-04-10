@@ -644,11 +644,6 @@
         "from": "https://github.com/jstang9527/aquaman",
         "up_time": "2022-12-19 04:11:50"
     },
-    "8fba6e0dac4983c5b9ae20dad660ff19": {
-        "name": "_190528_Zabbix_303_SQL_Injection.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-01-09 04:15:26"
-    },
     "522a26d2888769b31d4e4486cdaeff35": {
         "name": "session.py",
         "from": "https://github.com/TheConformist/360-POC",
@@ -679,189 +674,454 @@
         "from": "https://github.com/XiangLinMao/fuxi-scanner",
         "up_time": "2023-03-06 04:13:01"
     },
-    "a718979bbf0d1b1e6e9bf0658b0dfe19": {
-        "name": "SpringWebFlow_RCE_CVE-2017-4971.py",
-        "from": "https://github.com/rouze-d/pocsuite3-pocs",
-        "up_time": "2023-04-03 04:10:04"
+    "d43e590529ede9ceed8b6318caf5a2ec": {
+        "name": "canon_printer_unauth.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
     },
-    "cae845d24bc6761ec14d0d9756ae2d6a": {
-        "name": "SpringCloudConfig_CVE-2019-3799.py",
-        "from": "https://github.com/rouze-d/pocsuite3-pocs",
-        "up_time": "2023-04-03 04:10:04"
+    "238f39aff4e2de15b11231086c462857": {
+        "name": "asus_rt_n16_password_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
     },
-    "d5d8b87f9ea75aa50ee17b95300660e9": {
-        "name": "Zabbix_303_SQL_Injection.py",
-        "from": "https://github.com/trhacknon/pocsuite3-pocs",
-        "up_time": "2023-04-03 04:10:17"
+    "57d04f30aaed96b013605b17c724897f": {
+        "name": "brickcom_users_cgi_cred_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
     },
-    "cdda13e4d836cea715199e55bb9cf992": {
-        "name": "_180612_180418_WebLogic_wls_all_RCE.py",
-        "from": "https://github.com/shuanx/Penetration-Tools",
-        "up_time": "2023-04-03 04:10:27"
+    "77be5e92913a6a1c39b0bbe9d5c21083": {
+        "name": "billion_7700nr4_password_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
     },
-    "82997f135f8c3f755a0d85a763361cd5": {
+    "9b380adc89f9cd7cc5072bbdac45d9d7": {
+        "name": "ipfire_proxy_rce.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "fb20c86245b57e67136a85eb59a43370": {
+        "name": "goahead_command_execution.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "d680307054ae3586964894efadb96752": {
+        "name": "belkin_n750_rce.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "7d239ba2e45a0b2a89a0a99b0b448bbd": {
+        "name": "tcp_32764_info_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "0257c55c3561c7b21d639c0b8dfd217d": {
+        "name": "VacronNVR_command_execution.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "f1004483e0b98a853ec948ae3cc683d4": {
+        "name": "zte_f460_f660_backdoor.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "516b33e219aa8686daa2f697f34821fd": {
+        "name": "huawei_hg530_hg520b_password_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "87219b0ec7e61046ee64ec8222bc0d80": {
+        "name": "cisco_pvc239.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "bc6b159120ceba879beafb617468d436": {
+        "name": "shuttle_915wm_dns_change.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "746f5d51a20a5c2a5efa966585381c25": {
+        "name": "iptime_listing_of_the_root_filesystem.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "be3a09a3d722a8de7c4b99118f81a3dd": {
+        "name": "netgear_prosafe_rce.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "b532136933664c306aaebcc09f10a9e2": {
+        "name": "dlink_login_bypass.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "eb99dd2c120a3247a54d4137d79988c6": {
+        "name": "keda_camera_leakpassword.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "ce877f999a550fbbcabd1046f96ef91d": {
+        "name": "dlink_dir_300_320_600_615_info_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "702769551811a5b20d7b87d682d04e63": {
+        "name": "dlink_dir_6xx_8xx_password_disclosure_failed.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "e0226de75cdf07ddf3fab88d6d582031": {
+        "name": "dlink_dir_300_645_815_upnp_rce.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "e1a1834da60be9fad98fa784f3e94735": {
+        "name": "dlink_dwr_932b_backdoor.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "05477cb65210ee2312b6b1567a5b0860": {
+        "name": "airlive_command_injection.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "d7d5b3e7aa07be1234f62214d4b6ad11": {
+        "name": "netgear_wnr500_612v3_jnr1010_2010_path_traversal.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "6ab8eecfb6c124759ce830cc89a69cd3": {
+        "name": "belkin_n150_path_traversal.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "1e1be385af4fb43e41236870f818dc82": {
+        "name": "technicolor_dwg855_authbypass.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "df917e07f7e2e54424e28b758c28a289": {
+        "name": "dlink_110_412_615_815_arbitrary_code_execution.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "b451935dd109577845fce7db7bce980a": {
+        "name": "dlink_ipcamera7411_comand_execution.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "cab0dccf635410a7ef41517ba07ea2a2": {
+        "name": "tplink_wdr740nd_wdr740n_backdoor.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "5e827d1414ab3b7219c4bf1ad03e81ba": {
+        "name": "belkin_auth_bypass.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "b39e6e4728db89f24a4a5c8bd1ad4ecf": {
+        "name": "dlink_dir_645_info_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "3b347369f3cf91ca39f910fd60e0a196": {
+        "name": "dahua_backdoor.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "a963f41a402fb6337a04d2525c09a9b0": {
+        "name": "technicolor_tc7200_password_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "62ef2c85ad79d7aed47d258e6b1cd9fb": {
+        "name": "huawei_hg866_password_change.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "d24ff8eeb5f2f8ffdedc72467ddaf13e": {
+        "name": "belkin_g_plus_info_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "04c06ed67aaf351ceac3c0f2f7ebeab8": {
+        "name": "brickcom_cred_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "e9967320339fa3270e040dfd08dbfe5d": {
+        "name": "huawei_hg520_info_dislosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "27bc0d1e236d21fd0c468519ff290efa": {
+        "name": "netcore_udp_53413_rce.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "8d8661931c3e76f617d54c853ad681d7": {
+        "name": "dlink_cve_2018_5708.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "4dd2311b437f41ef4f88286ee408745c": {
+        "name": "zio_router_unauthorized_access.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "38280fc2b51d3dd8e38089f4b6012091": {
+        "name": "cisco_dpc2420_info_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "57b3d77d7bd95fc193be4e1c0226e4c6": {
+        "name": "zte_zxv10_rce.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "5d1c9a2fdd9fea60cf9ddf88fa43de0a": {
+        "name": "dlink_dir_645_815_rce.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "c1f7a6c6d9d0dcbb33c86e9b7dcf8833": {
+        "name": "Buffalo_blank_passwd.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "36180473eeb3882e4862894ef12e10e3": {
+        "name": "zyxel_d1000_wifi_password_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "941f11dc2856cad05e754334d82a6cdd": {
+        "name": "linksys_1500_2500_rce.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "489e5fb6c23512c0159dfbae47f27a5c": {
+        "name": "siemens_ip_camera_file_download.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "597752ce2e1456bdb2d07d8853c13110": {
+        "name": "netgear_dgn2200_dgnd3700_password_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "3355bf88518a0c4b6084868439d28484": {
+        "name": "NetGear_router_information.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "67ffe75784e70fb826a24566de3cd7c6": {
+        "name": "dlink_dir_6xx_8xx_password_disclosure.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "5e5354606e9380b4ad53474b8fc89c88": {
+        "name": "dlink_multi_hnap_rce.py",
+        "from": "https://github.com/KiritoLoveAsuna/Exploits",
+        "up_time": "2023-04-10 04:10:15"
+    },
+    "e2d2d28d1446aefb4c880fe4c22c7bbf": {
+        "name": "_190528_Zabbix_303_SQL_Injection.py",
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
+    },
+    "153ecc234d28f4abbbe17236fd83569d": {
         "name": "_190528_struts2_048_execution.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "f6cf745c0ffaca6cff48dff3b4bfb0bb": {
-        "name": "_190528_elasticsearch_exec.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
-    },
-    "066959cfd70b6d2e836820b0d2b2911e": {
-        "name": "_190528_ThinkPHP5_5_0_23_RCE.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
-    },
-    "6ab86b49a07664cb2ef0acea809f1e62": {
-        "name": "_190528_ThinkPHP5_RCE.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
-    },
-    "9ce29e119a2fb1347cac58cffbc51c21": {
-        "name": "_190528_Weblogic_File_Upload.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
-    },
-    "622b6bc28d86a48c0af19a7a9adefaff": {
-        "name": "_190528_iis_ms15_034_exec.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
-    },
-    "a0396c3ea92c189163e6e3c4405ac14b": {
-        "name": "_190528_WebLogic_wls_CVE_2016_0638_RCE.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
-    },
-    "de2d1fb4a3965cce70b2e1154fdded8f": {
-        "name": "_190528_ThinkPHP5_Information_disclosure.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
-    },
-    "da4f96a2f380172fb31349278477f56f": {
-        "name": "_190528_openssl_heartbleed_1_0_1_info.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
-    },
-    "3e55e030aedf278abcf8d706e662e11d": {
-        "name": "_190528_Struts2_057_RCE.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
-    },
-    "40ddde29ad91a670090308a1b8cf1872": {
-        "name": "_190528_WebLogic_wls_CVE_2016_3510_RCE.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
-    },
-    "05dabcb2fb0f25f279aed3b417f5b1c7": {
+    "1f71e02c93ee230ec10f421e68083e6c": {
         "name": "_190528_wordpress_core_4_6_rce.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "406d857d69b5ab367df4cbc90ab271f6": {
+    "ff598eb9661815be4c5ffa2e92512e62": {
+        "name": "_190528_iis_ms15_034_exec.py",
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
+    },
+    "fd20a0a54e3e579d83a22b86662b82d2": {
         "name": "_190528_thinkphp5__5_0_5_1_execute.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "b07347f7834d39f9c7c47666b64a46d0": {
-        "name": "_190528_struts2_045_exec.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
+    "3a8ed053deeffcf2cdfe55a0936dc8ae": {
+        "name": "_190528_ThinkPHP5_RCE.py",
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "b34ac362a641fa3492ac92dbfd0dbed7": {
+    "513f80beb3f7670bce0bb3ca92481040": {
         "name": "_190528_apple_macintosh_os_x_ds_store_information_disclosure.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "e8d65e35a8ad9ee6f8123309074e972d": {
-        "name": "_190528_detect_doublepulsar.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
+    "0f5865ec280aa466ac4e513890b46ef0": {
+        "name": "_190528_WebLogic_wls_CVE_2016_0638_RCE.py",
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "39c39f070ffe6212d1d61053d3ce0141": {
+    "9df340b6e27b4e152b9a8ab77b0458f2": {
         "name": "_190528_Redis_all_unauthorized.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2023-04-03 04:10:55"
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "7ef1f4d3fbc3b257c96ff59d0248643b": {
-        "name": "_180612_170605_SMB_ms17_010_RCE.py",
-        "from": "https://github.com/AndresOrduzGrimaldo/UFPS-Escaner",
-        "up_time": "2023-04-03 04:11:49"
+    "8be688abca97365ecd99153e807675ee": {
+        "name": "_190528_ThinkPHP5_5_0_23_RCE.py",
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "3140e740148f37457c72bfa2cc177c12": {
-        "name": "_190528_WebLogic_wls_all_RCE.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-04-03 04:13:00"
+    "a7965204cc144e4ffd9a91a19291db20": {
+        "name": "_190528_WebLogic_wls_CVE_2016_3510_RCE.py",
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "a4d4bc20e170a28db71aa72e6e97f0fc": {
+    "16cdeeb5bb0bfb0ae7d6866bd7a5a50d": {
+        "name": "_190528_ThinkPHP5_Information_disclosure.py",
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
+    },
+    "a2723ef0b5a8c60982bce8c2ee31206d": {
+        "name": "_190528_openssl_heartbleed_1_0_1_info.py",
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
+    },
+    "450427d1b15ecbf6fdb3f6f39684ff89": {
         "name": "_190528_phpMyAdmin_all_weak_password.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-04-03 04:13:00"
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "55297680a0f96f1b3425b41c772ef190": {
-        "name": "WebLogic_190528_wls_CVE_2016_3510_RCE.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-04-03 04:13:00"
+    "37dd49197a592f147d653c276fcb09d7": {
+        "name": "_190528_struts2_045_exec.py",
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "990b34a706afd42bcc969823ac7cb89b": {
-        "name": "WebLogic_180612_180418_wls_all_RCE.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-04-03 04:13:00"
+    "b5913fd990d07195f467e604b6d81768": {
+        "name": "_190528_Struts2_057_RCE.py",
+        "from": "https://github.com/gyh95226/git",
+        "up_time": "2023-04-10 04:10:28"
     },
-    "0cd3121a346dab7baed737b4f3d8af73": {
-        "name": "MongoDB_190528_Unauthorized.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-04-03 04:13:00"
-    },
-    "38d814f4b7922b51409d719087db89b7": {
-        "name": "WebLogic_190528_wls_CVE_2016_0638_RCE.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-04-03 04:13:00"
-    },
-    "c9fe096ff52f231cf021a1c30fbb9b83": {
-        "name": "SMB_180612_170605_ms17_010_RCE.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2023-04-03 04:13:00"
-    },
-    "cf1308afe8c50bb8f769e81ce8e6918f": {
-        "name": "poc.py",
-        "from": "https://github.com/whitephone/Pocsuite",
-        "up_time": "2023-04-03 04:13:27"
-    },
-    "938082c70ea13030ca0e68909f78e46f": {
-        "name": "apache_flink_rce.py",
-        "from": "https://github.com/co0ontty/pocdb",
-        "up_time": "2023-04-03 04:13:49"
-    },
-    "770ceaf5c552c8d3f47541f764a3ef47": {
-        "name": "cve_2018_5955.py",
-        "from": "https://github.com/co0ontty/pocdb",
-        "up_time": "2023-04-03 04:13:49"
-    },
-    "047686719da4c36389d7db59839ae905": {
-        "name": "cve_2019_2725.py",
-        "from": "https://github.com/co0ontty/pocdb",
-        "up_time": "2023-04-03 04:13:49"
-    },
-    "04ed52c346daa5a42b6973198848f534": {
-        "name": "maccms_backdoor.py",
-        "from": "https://github.com/co0ontty/pocdb",
-        "up_time": "2023-04-03 04:13:49"
-    },
-    "420ab9d5da7ead83f063ee44b71be575": {
-        "name": "Spring_Cloud_Config_Directory_traversal.py",
-        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
-        "up_time": "2023-04-03 04:15:31"
-    },
-    "7c2b50c7b3a20af722ba9b768faf53fb": {
+    "6be57ea1c17af1488adcb8bf488ca1ee": {
         "name": "thinkphp_rce_5.py",
         "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
-        "up_time": "2023-04-03 04:15:31"
+        "up_time": "2023-04-10 04:10:29"
     },
-    "fe9eb9cd74c48ff797a761c6ca507b78": {
+    "29331f4265a3236aacad54ebced6fa63": {
+        "name": "maccms_backdoor.py",
+        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
+        "up_time": "2023-04-10 04:10:29"
+    },
+    "cbcfab8480ec5a913a921ec8ea1c54e6": {
+        "name": "Spring_Cloud_Config_Directory_traversal.py",
+        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
+        "up_time": "2023-04-10 04:10:29"
+    },
+    "5536364ae3330842ac28004c6024b43b": {
+        "name": "SpringCloudConfig_CVE-2019-3799.py",
+        "from": "https://github.com/xx-zhang/pocsuite3-pocs",
+        "up_time": "2023-04-10 04:10:41"
+    },
+    "8042763d47d67c261e647d9d93f8fb1c": {
+        "name": "SpringWebFlow_RCE_CVE-2017-4971.py",
+        "from": "https://github.com/aideyisu/CTF",
+        "up_time": "2023-04-10 04:10:57"
+    },
+    "abf4c53ad6ecf3a9bcae0a2edaba0ccb": {
+        "name": "_180612_180418_WebLogic_wls_all_RCE.py",
+        "from": "https://github.com/AndresOrduzGrimaldo/UFPS-Escaner",
+        "up_time": "2023-04-10 04:11:19"
+    },
+    "ca047c333396cbd333e344141cde09cd": {
+        "name": "_190528_WebLogic_wls_all_RCE.py",
+        "from": "https://github.com/TideSec/Mars",
+        "up_time": "2023-04-10 04:11:34"
+    },
+    "fcf3a103e23d67cca433333b7fff1963": {
+        "name": "apache_flink_rce.py",
+        "from": "https://github.com/co0ontty/pocdb",
+        "up_time": "2023-04-10 04:12:21"
+    },
+    "19340968292bd4c0427d796e0b44e25a": {
+        "name": "cve_2018_5955.py",
+        "from": "https://github.com/co0ontty/pocdb",
+        "up_time": "2023-04-10 04:12:21"
+    },
+    "c3ff8379d17d222c3b1c0def74d37c36": {
+        "name": "cve_2019_2725.py",
+        "from": "https://github.com/co0ontty/pocdb",
+        "up_time": "2023-04-10 04:12:21"
+    },
+    "692c5e231475f48a41c8632701041781": {
+        "name": "WebLogic_190528_wls_CVE_2016_3510_RCE.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-04-10 04:13:05"
+    },
+    "4d4935421ca9e6649ac57656bb49d544": {
+        "name": "MongoDB_190528_Unauthorized.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-04-10 04:13:05"
+    },
+    "c244e1f86b9d89ff8b860bc040c8ae50": {
+        "name": "WebLogic_190528_wls_CVE_2016_0638_RCE.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-04-10 04:13:05"
+    },
+    "1e17bcb484bcee9828de517326dbf40b": {
+        "name": "SMB_180612_170605_ms17_010_RCE.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-04-10 04:13:05"
+    },
+    "a81ba73a9b2788fa3c6b15bb80cb3177": {
+        "name": "WebLogic_180612_180418_wls_all_RCE.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-04-10 04:13:05"
+    },
+    "60f153062bfc8ab17128d9e2c829cdf6": {
+        "name": "_180612_170605_SMB_ms17_010_RCE.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-04-10 04:13:05"
+    },
+    "5f1aea595c526feda7d3eb7ab2b886aa": {
+        "name": "_190528_detect_doublepulsar.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-04-10 04:13:05"
+    },
+    "eaac4dd41ce6139c7a6cbec110c3b004": {
+        "name": "_190528_Weblogic_File_Upload.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-04-10 04:13:05"
+    },
+    "37f2883a1c39500a620fdabdf575f4e5": {
+        "name": "_190528_elasticsearch_exec.py",
+        "from": "https://github.com/jstang9527/aquaman",
+        "up_time": "2023-04-10 04:13:05"
+    },
+    "c46d3f1b988cce3049e9ed728a183d52": {
+        "name": "SQL_Injection.py",
+        "from": "https://github.com/FlaWww65535/BSMS_SQL_Injection",
+        "up_time": "2023-04-10 04:15:49"
+    },
+    "bebde0e4da2fb93fd43939dac34194de": {
+        "name": "Require_session.py",
+        "from": "https://github.com/FlaWww65535/BSMS_SQL_Injection",
+        "up_time": "2023-04-10 04:15:49"
+    },
+    "5bb01a77ad779794f88e6be9700cb75e": {
+        "name": "poc.py",
+        "from": "https://github.com/leisurelicht/Pocsuite3",
+        "up_time": "2023-04-10 04:15:54"
+    },
+    "6b01ee1fc45906fb286b2cc31b331189": {
         "name": "settings.py",
-        "from": "https://github.com/xuchaoa/WebScan",
-        "up_time": "2023-04-03 04:16:26"
+        "from": "https://github.com/The-Cracker-Technology/pocsuite3",
+        "up_time": "2023-04-10 04:16:02"
+    },
+    "c63c7cf40ce89fab965133086d7ccac7": {
+        "name": "Zabbix_303_SQL_Injection.py",
+        "from": "https://github.com/Pontusec/pocsuite3",
+        "up_time": "2023-04-10 04:18:12"
     }
 }
