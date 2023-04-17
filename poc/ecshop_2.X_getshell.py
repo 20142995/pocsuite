@@ -21,7 +21,7 @@ class TestPOC(POCBase):
     desc = '''
     	ecshop2.X版本造成注入和代码执行 在根目录下生成1.php 密码1337
     '''
-    samples = ['http://220.133.158.172/']
+    samples = ['']
 
     def _verify(self):
         try:

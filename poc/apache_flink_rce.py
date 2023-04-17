@@ -3,6 +3,8 @@
 from pocsuite.api.poc import register
 from pocsuite.api.poc import Output, POCBase
 from urlparse import urljoin
+from pocsuite.lib.core.enums import CUSTOM_LOGGING
+from pocsuite.lib.core.data import logger
 from pocsuite.api.request import req
 import time,sys,json,base64,argparse,trace,cStringIO,re
 
@@ -93,7 +95,12 @@ class TestPOC(POCBase):
 
         result = {}
         target = self.url
-        command = "whoami"
+        if 'cmd' not in self.params:
+            logger.log(CUSTOM_LOGGING.SYSINFO,
+                       "You can use --extra-params=\"{'cmd': 'xxx'}\" to exec command")
+            command =  "whoami"
+        else:
+            command = self.params['cmd']
         try:
             r = exec_command(target,command)
             if r:
