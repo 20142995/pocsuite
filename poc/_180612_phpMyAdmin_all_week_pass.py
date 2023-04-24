@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Author  : yds
+# @Author  : jeffzhang
 # @Time    : 18-6-13
 # @File    : 180612_phpMyAdmin_all_week_pass.py
 # @Desc    : ""
@@ -13,7 +13,7 @@ from pocsuite.api.poc import Output, POCBase
 class TestPOC(POCBase):
     vulID = '0001'
     version = '1'
-    author = 'yds'
+    author = 'jeffzhang'
     vulDate = '2010-01-01'
     createDate = '2018-06-13'
     updateDate = '2018-06-13'

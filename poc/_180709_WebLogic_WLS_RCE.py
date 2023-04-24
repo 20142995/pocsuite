@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Author  : yds
+# @Author  : jeffzhang
 # @Time    : 18-7-9
 # @File    : _180709_WebLogic_WLS_RCE.py
 # @Desc    : ""
@@ -15,7 +15,7 @@ from pocsuite.api.poc import Output, POCBase
 class TestPOC(POCBase):
     vulID = '00007'
     version = '1'
-    author = 'yds'
+    author = 'jeffzhang'
     vulDate = '2017-10-17'
     createDate = '2018-07-09'
     updateDate = '2018-07-09'
