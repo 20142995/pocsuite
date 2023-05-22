@@ -9,13 +9,7 @@ from pocsuite3.lib.core.revision import get_revision_number
 VERSION = __version__
 REVISION = get_revision_number()
 SITE = "http://pocsuite.org"
-VERSION_STRING = "pocsuite/%s%s" % (VERSION, "-%s" % REVISION if REVISION else "-nongit-%s" % time.strftime("%Y%m%d",
-                                                                                                            time.gmtime(
-                                                                                                                os.path.getctime(
-                                                                                                                    __file__.replace(
-                                                                                                                        '.pyc',
-                                                                                                                        '.py') if __file__.endswith(
-                                                                                                                        'pyc') else __file__))))
+VERSION_STRING = "pocsuite/%s%s" % (VERSION, "-%s" % REVISION if REVISION else "-nongit-%s" % time.strftime("%Y%m%d", time.gmtime(os.path.getctime(__file__.replace('.pyc', '.py') if __file__.endswith('pyc') else __file__))))
 
 IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else False
 PLATFORM = os.name
@@ -90,7 +84,6 @@ OS_ARCH = machine()
 # Cmd line parse whitelist
 CMD_PARSE_WHITELIST = ['version', 'update', 'url', 'file', 'verify', 'attack', 'shell', 'cookie', 'host', 'referer',
                        'user-agent', 'random-agent', 'proxy', 'proxy-cred', 'timeout', 'retry', 'delay', 'headers',
-                       'login-user', 'login-pass', 'dork', 'dork-shodan', 'dork-censys', 'dork-zoomeye', 'dork-fofa',
-                       'max-page', 'search-type', 'shodan-token', 'fofa-user', 'fofa-token', 'vul-keyword', 'ssv-id',
-                       'lhost', 'lport', 'plugins', 'pocs-path', 'threads', 'batch', 'requires', 'quiet', 'poc',
-                       'verbose', 'mode', 'api', 'connect_back_host', 'connect_back_port', 'ppt', 'help']
+                       'login-user', 'login-pass', 'dork', 'max-page', 'search-type',
+                       'vul-keyword', 'ssv-id', 'lhost', 'lport', 'plugins', 'pocs-path', 'threads', 'batch',
+                       'requires', 'quiet']
