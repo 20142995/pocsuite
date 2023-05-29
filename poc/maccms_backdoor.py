@@ -34,7 +34,8 @@ class TestPOC(POCBase):
                 "Accept": "text/html"
             }
             if "#Login" in resp.text and "Microsoft YaHei" in resp.text:
-                result['VerifyInfo'] = "success"
+                result['VerifyInfo'] = {}
+                result['VerifyInfo']['URL'] = target
                 try:
                     log_resp = req.post(target, headers=headers, data=login_data)
                     if "whoami"in log_resp.text and "uid" in log_resp.text:
