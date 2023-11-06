@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Author  : jeffzhang
+# @Author  : TideSec
 # @Time    : 2018/04/19
 # @File    : _170605_SMB_ms17_010_RCE.py
 # @Desc    : ""
@@ -14,7 +14,7 @@ from pocsuite.api.poc import Output, POCBase
 class TestPOC(POCBase):
     vulID = '00005'
     version = '1'
-    author = 'jeffzhang'
+    author = 'TideSec'
     vulDate = '2017-05-12'
     createDate = '2018-04-19'
     updateDate = '2018-04-19'
