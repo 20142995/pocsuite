@@ -4,8 +4,10 @@
 import binascii
 import socket
 
-from pocsuite.poc import POCBase, Output
-from pocsuite.utils import register
+# from pocsuite.poc import POCBase, Output
+# from pocsuite.utils import register
+from pocsuite.api.poc import register
+from pocsuite.api.poc import Output, POCBase
 from pocsuite.api.utils import url2ip
 
 
