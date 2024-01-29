@@ -140,10 +140,10 @@ class TestPOC(POCBase):
                         result['VerifyInfo']['port'] = target_port
                         result['VerifyInfo']['result'] = re_result[:20]
             except Exception as e:
-                print(e)
+                # print(e)
                 pass
         except Exception as e:
-            print(e)
+            # print(e)
             pass
         sock.close()
         return self.parse_attack(result)
