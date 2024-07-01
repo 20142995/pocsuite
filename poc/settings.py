@@ -48,11 +48,11 @@ POC_IMPORTDICT = {
     "from pocsuite.api.request import req": "from pocsuite3.lib.request import requests as req",
     "from pocsuite.poc import": "from pocsuite3.lib.core.poc import",
     "from pocsuite.api.poc import": "from pocsuite3.lib.core.poc import",
-    "from pocsuite.utils import register": "from pocsuite3.lib.core.register import register_poc as register",
-    "from pocsuite.lib.utils.funs import randomStr": "from pocsuite3.lib.utils import random_str as randomStr",
-    "from pocsuite.api.utils import randomStr": "from pocsuite3.lib.utils import random_str as randomStr",
-    "from pocsuite.lib.utils.funs import url2ip": "from pocsuite3.lib.utils import url2ip",
-    "from pocsuite.api.utils import url2ip": "from pocsuite3.lib.utils import url2ip",
+    "from pocsuite.ScanMoudle import register": "from pocsuite3.lib.core.register import register_poc as register",
+    "from pocsuite.lib.ScanMoudle.funs import randomStr": "from pocsuite3.lib.ScanMoudle import random_str as randomStr",
+    "from pocsuite.api.ScanMoudle import randomStr": "from pocsuite3.lib.ScanMoudle import random_str as randomStr",
+    "from pocsuite.lib.ScanMoudle.funs import url2ip": "from pocsuite3.lib.ScanMoudle import url2ip",
+    "from pocsuite.api.ScanMoudle import url2ip": "from pocsuite3.lib.ScanMoudle import url2ip",
     ".content": ".text",
 }
 # Regular expression used for recognition of IP addresses
@@ -86,4 +86,4 @@ CMD_PARSE_WHITELIST = ['version', 'update', 'url', 'file', 'verify', 'attack', '
                        'user-agent', 'random-agent', 'proxy', 'proxy-cred', 'timeout', 'retry', 'delay', 'headers',
                        'login-user', 'login-pass', 'dork', 'max-page', 'search-type',
                        'vul-keyword', 'ssv-id', 'lhost', 'lport', 'plugins', 'pocs-path', 'threads', 'batch',
-                       'requires', 'quiet', 'poc', 'verbose', 'mode', 'api', 'connect_back_host', 'connect_back_port']
+                       'requires', 'quiet']
