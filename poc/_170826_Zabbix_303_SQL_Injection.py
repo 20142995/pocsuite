@@ -14,13 +14,13 @@ class TestPOC(POCBase):
     createDate = '2017-08-26'
     updateDate = '2017-08-26'
     references = ['http://www.freebuf.com/vuls/112197.html']
-    name = 'Zabbix SQl 注入漏洞 PoC'
+    name = 'Zabbix SQL Inject 3.0.3'
     appPowerLink = 'https://www.zabbix.com'
     appName = 'Zabbix'
     appVersion = '3.0.3'
     vulType = 'SQL Injection'
     desc = '''
-    	Zabbix 2.2.x和3.0.x版本中存在两处基于错误回显的SQL注入漏洞
+    	Zabbix 2.2.x - 3.0.x SQL Inject
     '''
     samples = ['http://89.239.138.140:5001/']
 

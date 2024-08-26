@@ -1,96 +1,138 @@
-import sys
-import time
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Copyright (c) 2014-2015 pocsuite developers (http://seebug.org)
+See the file 'docs/COPYING' for copying permission
+"""
+
 import os
-from platform import system, machine
+import subprocess
+import time
+import sys
 
-from pocsuite3 import __version__
-from pocsuite3.lib.core.revision import get_revision_number
+from pocsuite.lib.core.revision import getRevisionNumber
 
-VERSION = __version__
-REVISION = get_revision_number()
-SITE = "http://pocsuite.org"
-VERSION_STRING = "pocsuite/%s%s" % (VERSION, "-%s" % REVISION if REVISION else "-nongit-%s" % time.strftime("%Y%m%d",
-                                                                                                            time.gmtime(
-                                                                                                                os.path.getctime(
-                                                                                                                    __file__.replace(
-                                                                                                                        '.pyc',
-                                                                                                                        '.py') if __file__.endswith(
-                                                                                                                        'pyc') else __file__))))
+VERSION = "1.0.0dev"
+REVISION = getRevisionNumber()
+SITE = "http://seebug.org"
+VERSION_STRING = "pocsuite/%s%s" % (VERSION, "-%s" % REVISION if REVISION else "-nongit-%s" % time.strftime("%Y%m%d", time.gmtime(os.path.getctime(__file__))))
 
-IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else False
+IS_WIN = subprocess.mswindows
+
 PLATFORM = os.name
 PYVERSION = sys.version.split()[0]
 
-ISSUES_PAGE = "https://github.com/knownsec/pocsuite3/issues"
-GIT_REPOSITORY = "https://github.com/knownsec/pocsuite3.git"
-GIT_PAGE = "https://github.com/knownsec/pocsuite3"
-ZIPBALL_PAGE = "https://github.com/knownsec/pocsuite3/zipball/master"
+ISSUES_PAGE = "https://github.com/knownsec/Pocsuite/issues"
+GIT_REPOSITORY = "git@github.com:knownsec/Pocsuite.git"
+GIT_PAGE = "https://github.com/knownsec/Pocsuite"
 
 LEGAL_DISCLAIMER = "Usage of pocsuite for attacking targets without prior mutual consent is illegal."
 
+
 BANNER = """\033[01;33m
-,------.                        ,--. ,--.       ,----.   \033[01;37m{\033[01;%dm%s\033[01;37m}\033[01;33m
-|  .--. ',---. ,---.,---.,--.,--`--,-'  '-.,---.'.-.  | 
-|  '--' | .-. | .--(  .-'|  ||  ,--'-.  .-| .-. : .' <  
-|  | --'' '-' \ `--.-'  `'  ''  |  | |  | \   --/'-'  | 
-`--'     `---' `---`----' `----'`--' `--'  `----`----'   \033[0m\033[4;37m%s\033[0m                                            
+                              ,--. ,--.
+ ,---. ,---. ,---.,---.,--.,--`--,-'  '-.,---.  \033[01;37m{\033[01;%dm%s\033[01;37m}\033[01;33m
+| .-. | .-. | .--(  .-'|  ||  ,--'-.  .-| .-. :
+| '-' ' '-' \ `--.-'  `'  ''  |  | |  | \   --.
+|  |-' `---' `---`----' `----'`--' `--'  `----'
+`--'                                            \033[0m\033[4;37m%s\033[0m
+
 """ % ((31 + hash(REVISION) % 6) if REVISION else 30, VERSION_STRING.split('/')[-1], SITE)
 
 # Encoding used for Unicode data
 UNICODE_ENCODING = "utf-8"
+# Format used for representing invalid unicode characters
+INVALID_UNICODE_CHAR_FORMAT = r"\?%02x"
 
-DEFAULT_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36"
+USAGE = "pocsuite [options]"
 
-BOLD_PATTERNS = ("' is vulnerable", "success", "\d    ",)
+INDENT = " " * 2
+
+POC_ATTRS = ("vulID", "version", "author", "vulDate", "name", "appVersion", "desc", "createDate", "updateDate", "references", "appPowerLink", "vulType", "appName")
+
+POC_IMPORTDICT = {
+    "from pocsuite.net import": "from pocsuite.lib.request.basic import",
+    "from pocsuite.poc import": "from pocsuite.lib.core.poc import",
+    "from pocsuite.utils import register": "from pocsuite.lib.core.register import registerPoc as register",
+    "from pocsuite.lib": "from pocsuite.lib"
+}
+
+POC_REGISTER_STRING = "\nfrom pocsuite.api.poc import register\nregister({})"
+POC_REGISTER_REGEX = "register\(.*\)"
+POC_CLASSNAME_REGEX = "class\s+(.*?)\(POCBase\)"
+POC_REQUIRES_REGEX = "install_requires\s*?=\s*?\[(.*?)\]"
 
 OLD_VERSION_CHARACTER = ("from comm import cmdline", "from comm import generic")
-POCSUITE_VERSION_CHARACTER = ("from pocsuite.poc import", "from pocsuite.net import")
-POC_IMPORTDICT = {
-    "import urlparse": "from urllib import parse as urlparse",
-    "import urllib2": "from urllib import request as urllib2",
-    "import urllib": "from urllib import parse as urllib",
-    "from urlparse import": "from urllib.parse import",
-    "from pocsuite.net import req": "from pocsuite3.lib.request import requests as req",
-    "from pocsuite.api.request import req": "from pocsuite3.lib.request import requests as req",
-    "from pocsuite.poc import": "from pocsuite3.lib.core.poc import",
-    "from pocsuite.api.poc import": "from pocsuite3.lib.core.poc import",
-    "from pocsuite.utils import register": "from pocsuite3.lib.core.register import register_poc as register",
-    "from pocsuite.lib.utils.funs import randomStr": "from pocsuite3.lib.utils import random_str as randomStr",
-    "from pocsuite.api.utils import randomStr": "from pocsuite3.lib.utils import random_str as randomStr",
-    "from pocsuite.lib.utils.funs import url2ip": "from pocsuite3.lib.utils import url2ip",
-    "from pocsuite.api.utils import url2ip": "from pocsuite3.lib.utils import url2ip",
-    ".content": ".text",
+
+HTTP_DEFAULT_HEADER = {
+    "Accept": "*/*",
+    "Accept-Charset": "GBK,utf-8;q=0.7,*;q=0.3",
+    "Accept-Language": "zh-CN,zh;q=0.8",
+    "Cache-Control": "max-age=0",
+    "Connection": "keep-alive",
+    "Referer": "http://www.baidu.com",
+    "User-Agent": "Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0"
 }
-# Regular expression used for recognition of IP addresses
-IP_ADDRESS_REGEX = r"\b(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\b"
-IP_ADDRESS_WITH_PORT_REGEX = r"\b(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):[\d]{2,5}\b"
-IPV6_ADDRESS_REGEX = r"^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$"
-IPV6_URL_REGEX = r"(https?:\/\/)?\[((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\](:\d+)?(\/)?"
-URL_ADDRESS_REGEX = r"(?:(?:https?):\/\/|www\.|ftp\.)(?:\([-a-zA-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-a-zA-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-a-zA-Z0-9+&@#\/%=~_|$?!:,.]*\)|[a-zA-Z0-9+&@#\/%=~_|$])"
-URL_DOMAIN_REGEX = r"(?:www)?(?:[\w-]{2,255}(?:\.\w{2,6}){1,3})(?:/[\w&%?#-]{1,300})?(?:\:\d+)?"
-LOCAL_IP_ADDRESS_REGEX = r"(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(^192\.168\.)"
 
-POC_REQUIRES_REGEX = r"install_requires\s*=\s*\[(?P<result>.*?)\]"
 
-POC_NAME_REGEX = r'''(?sm)POCBase\):.*?name\s*=\s*['"](?P<result>.*?)['"]'''
+PCS_OPTIONS = {
+    'threads': 1,
+    'url': None,
+    'urlFile': None,
+    'agent': None,
+    'pocFile': None,
+    'isPocString': False,
+    'pocname': None,
+    'referer': None,
+    'Mode': 'verify',
+    'cookie': None,
+    'randomAgent': False,
+    'report': None,
+    'proxy': None,
+    'proxyCred': None,
+    'timeout': 5
+}
 
-MAX_NUMBER_OF_THREADS = 20
+REPORT_TABLEBASE = """\
+    <tbody>
+    %s
+    </tbody>
+    """
 
-DEFAULT_LISTENER_PORT = 6666
-
-# Maximum number of lines to save in history file
-MAX_HISTORY_LENGTH = 1000
-
-IMG_EXT = ('.jpg', '.png', '.gif')
-
-TIMESTAMP = time.strftime('%Y%m%d%H%M%S', time.gmtime())
-OS_SYSTEM = system().upper()
-OS_ARCH = machine()
-
-# Cmd line parse whitelist
-CMD_PARSE_WHITELIST = ['version', 'update', 'url', 'file', 'verify', 'attack', 'shell', 'cookie', 'host', 'referer',
-                       'user-agent', 'random-agent', 'proxy', 'proxy-cred', 'timeout', 'retry', 'delay', 'headers',
-                       'login-user', 'login-pass', 'dork', 'dork-shodan', 'dork-censys', 'dork-zoomeye', 'dork-fofa',
-                       'max-page', 'search-type', 'shodan-token', 'fofa-user', 'fofa-token', 'vul-keyword', 'ssv-id',
-                       'lhost', 'lport', 'plugins', 'pocs-path', 'threads', 'batch', 'requires', 'quiet', 'poc',
-                       'verbose', 'mode', 'api', 'connect_back_host', 'connect_back_port', 'ppt', 'help']
+REPORT_HTMLBASE = """\
+    <!DOCTYPE html>
+    <html lang="zh-cn">
+        <head>
+            <meta charset="utf-8">
+            <title></title>
+            <style type="text/css">
+            caption{padding-top:8px;padding-bottom:8px;color:#777;text-align:left}th{text-align:left}.table{width:100%%;max-width:100%%;margin-bottom:20px}.table>thead>tr>th,.table>tbody>tr>th,.table>tfoot>tr>th,.table>thead>tr>td,.table>tbody>tr>td,.table>tfoot>tr>td{padding:8px;line-height:1.42857143;vertical-align:top;border-top:1px solid #ddd}.table>thead>tr>th{vertical-align:bottom;border-bottom:2px solid #ddd}.result0{display:none}.result1{}.status{cursor: pointer;}
+            </style>
+            <script>
+                function showDetail(dom){
+                    parent = dom.parentElement;
+                    detail = parent.children[1];
+                    if (detail == undefined){
+                        return;
+                    };
+                    if (detail.className == 'result0'){
+                        detail.className = 'result1';
+                    }else{
+                        detail.className = 'result0';
+                    };
+                }
+            </script>
+        </head>
+        <body>
+            <div class="container">
+                <table class="table">
+                    <thead>
+    %s
+                    </thead>
+    %s
+                </table>
+            </div>
+        </body>
+    </html>
+    """
