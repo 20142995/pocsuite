@@ -1039,124 +1039,124 @@
         "from": "https://github.com/20142995/pocsuite",
         "up_time": "2024-03-04 04:39:28"
     },
-    "8fba6e0dac4983c5b9ae20dad660ff19": {
-        "name": "_190528_Zabbix_303_SQL_Injection.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2024-07-01 04:16:36"
-    },
     "8d585f99461f3daf21cdb8132566e313": {
         "name": "_170826_Zabbix_303_SQL_Injection.py",
         "from": "https://github.com/cocoflan/Fuxi-Scanner",
         "up_time": "2024-08-26 04:13:45"
     },
-    "abf4c53ad6ecf3a9bcae0a2edaba0ccb": {
-        "name": "_180612_180418_WebLogic_wls_all_RCE.py",
-        "from": "https://github.com/cocoflan/Fuxi-Scanner",
-        "up_time": "2024-08-26 04:13:45"
-    },
-    "ca047c333396cbd333e344141cde09cd": {
+    "3140e740148f37457c72bfa2cc177c12": {
         "name": "_190528_WebLogic_wls_all_RCE.py",
-        "from": "https://github.com/syadg123/TideSec-Mars",
-        "up_time": "2024-08-26 04:15:16"
-    },
-    "19340968292bd4c0427d796e0b44e25a": {
-        "name": "cve_2018_5955.py",
-        "from": "https://github.com/co0ontty/pocdb",
-        "up_time": "2024-08-26 04:15:17"
-    },
-    "c3ff8379d17d222c3b1c0def74d37c36": {
-        "name": "cve_2019_2725.py",
-        "from": "https://github.com/co0ontty/pocdb",
-        "up_time": "2024-08-26 04:15:17"
-    },
-    "fcf3a103e23d67cca433333b7fff1963": {
-        "name": "apache_flink_rce.py",
-        "from": "https://github.com/co0ontty/pocdb",
-        "up_time": "2024-08-26 04:15:17"
-    },
-    "29331f4265a3236aacad54ebced6fa63": {
-        "name": "maccms_backdoor.py",
-        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
-        "up_time": "2024-08-26 04:15:25"
-    },
-    "6be57ea1c17af1488adcb8bf488ca1ee": {
-        "name": "thinkphp_rce_5.py",
-        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
-        "up_time": "2024-08-26 04:15:25"
-    },
-    "cbcfab8480ec5a913a921ec8ea1c54e6": {
-        "name": "Spring_Cloud_Config_Directory_traversal.py",
-        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
-        "up_time": "2024-08-26 04:15:25"
-    },
-    "8042763d47d67c261e647d9d93f8fb1c": {
-        "name": "SpringWebFlow_RCE_CVE-2017-4971.py",
-        "from": "https://github.com/aideyisu/CTF",
-        "up_time": "2024-08-26 04:15:34"
-    },
-    "60f153062bfc8ab17128d9e2c829cdf6": {
-        "name": "_180612_170605_SMB_ms17_010_RCE.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2024-08-26 04:16:11"
+        "up_time": "2024-09-02 04:14:11"
     },
-    "eaac4dd41ce6139c7a6cbec110c3b004": {
-        "name": "_190528_Weblogic_File_Upload.py",
+    "cdda13e4d836cea715199e55bb9cf992": {
+        "name": "_180612_180418_WebLogic_wls_all_RCE.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2024-08-26 04:16:11"
+        "up_time": "2024-09-02 04:14:11"
     },
-    "5f1aea595c526feda7d3eb7ab2b886aa": {
-        "name": "_190528_detect_doublepulsar.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2024-08-26 04:16:11"
-    },
-    "37f2883a1c39500a620fdabdf575f4e5": {
-        "name": "_190528_elasticsearch_exec.py",
-        "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2024-08-26 04:16:11"
-    },
-    "c244e1f86b9d89ff8b860bc040c8ae50": {
+    "38d814f4b7922b51409d719087db89b7": {
         "name": "WebLogic_190528_wls_CVE_2016_0638_RCE.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2024-08-26 04:16:11"
+        "up_time": "2024-09-02 04:14:11"
     },
-    "1e17bcb484bcee9828de517326dbf40b": {
+    "c9fe096ff52f231cf021a1c30fbb9b83": {
         "name": "SMB_180612_170605_ms17_010_RCE.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2024-08-26 04:16:11"
+        "up_time": "2024-09-02 04:14:11"
     },
-    "a81ba73a9b2788fa3c6b15bb80cb3177": {
+    "990b34a706afd42bcc969823ac7cb89b": {
         "name": "WebLogic_180612_180418_wls_all_RCE.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2024-08-26 04:16:11"
+        "up_time": "2024-09-02 04:14:11"
     },
-    "692c5e231475f48a41c8632701041781": {
+    "55297680a0f96f1b3425b41c772ef190": {
         "name": "WebLogic_190528_wls_CVE_2016_3510_RCE.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2024-08-26 04:16:11"
+        "up_time": "2024-09-02 04:14:11"
     },
-    "4d4935421ca9e6649ac57656bb49d544": {
+    "0cd3121a346dab7baed737b4f3d8af73": {
         "name": "MongoDB_190528_Unauthorized.py",
         "from": "https://github.com/jstang9527/aquaman",
-        "up_time": "2024-08-26 04:16:11"
+        "up_time": "2024-09-02 04:14:11"
     },
-    "c63c7cf40ce89fab965133086d7ccac7": {
-        "name": "Zabbix_303_SQL_Injection.py",
-        "from": "https://github.com/Pontusec/pocsuite3",
-        "up_time": "2024-08-26 04:16:44"
+    "b1197889b53496b57d1b6756c2c19ecf": {
+        "name": "_180612_170605_SMB_ms17_010_RCE.py",
+        "from": "https://github.com/syadg123/TideSec-Mars",
+        "up_time": "2024-09-02 04:14:14"
     },
-    "e030e7ca006fa023ef98f9dd62babc25": {
-        "name": "settings.py",
-        "from": "https://github.com/webvul/pocsuite-mydev",
-        "up_time": "2024-08-26 04:16:49"
+    "9ce29e119a2fb1347cac58cffbc51c21": {
+        "name": "_190528_Weblogic_File_Upload.py",
+        "from": "https://github.com/syadg123/TideSec-Mars",
+        "up_time": "2024-09-02 04:14:14"
     },
-    "5536364ae3330842ac28004c6024b43b": {
+    "e2d2d28d1446aefb4c880fe4c22c7bbf": {
+        "name": "_190528_Zabbix_303_SQL_Injection.py",
+        "from": "https://github.com/syadg123/TideSec-Mars",
+        "up_time": "2024-09-02 04:14:14"
+    },
+    "e8d65e35a8ad9ee6f8123309074e972d": {
+        "name": "_190528_detect_doublepulsar.py",
+        "from": "https://github.com/syadg123/TideSec-Mars",
+        "up_time": "2024-09-02 04:14:14"
+    },
+    "f6cf745c0ffaca6cff48dff3b4bfb0bb": {
+        "name": "_190528_elasticsearch_exec.py",
+        "from": "https://github.com/syadg123/TideSec-Mars",
+        "up_time": "2024-09-02 04:14:14"
+    },
+    "a718979bbf0d1b1e6e9bf0658b0dfe19": {
+        "name": "SpringWebFlow_RCE_CVE-2017-4971.py",
+        "from": "https://github.com/Crush-sudo/pocsuite",
+        "up_time": "2024-09-02 04:14:15"
+    },
+    "cae845d24bc6761ec14d0d9756ae2d6a": {
         "name": "SpringCloudConfig_CVE-2019-3799.py",
-        "from": "https://github.com/xx-zhang/pocsuite3-pocs",
-        "up_time": "2024-08-26 04:17:46"
+        "from": "https://github.com/Crush-sudo/pocsuite",
+        "up_time": "2024-09-02 04:14:15"
     },
-    "5bb01a77ad779794f88e6be9700cb75e": {
+    "d5d8b87f9ea75aa50ee17b95300660e9": {
+        "name": "Zabbix_303_SQL_Injection.py",
+        "from": "https://github.com/xx-zhang/pocsuite3-pocs",
+        "up_time": "2024-09-02 04:14:56"
+    },
+    "420ab9d5da7ead83f063ee44b71be575": {
+        "name": "Spring_Cloud_Config_Directory_traversal.py",
+        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
+        "up_time": "2024-09-02 04:16:11"
+    },
+    "7c2b50c7b3a20af722ba9b768faf53fb": {
+        "name": "thinkphp_rce_5.py",
+        "from": "https://github.com/co0ontty/Eight-Diagram-tactics",
+        "up_time": "2024-09-02 04:16:11"
+    },
+    "d5e777f70be540e3dc9136578f6ba979": {
         "name": "poc.py",
-        "from": "https://github.com/leisurelicht/Pocsuite3",
-        "up_time": "2024-08-26 04:19:53"
+        "from": "https://github.com/imjdl/CVE-2019-11510-poc",
+        "up_time": "2024-09-02 04:16:39"
+    },
+    "770ceaf5c552c8d3f47541f764a3ef47": {
+        "name": "cve_2018_5955.py",
+        "from": "https://github.com/co0ontty/pocdb",
+        "up_time": "2024-09-02 04:17:08"
+    },
+    "047686719da4c36389d7db59839ae905": {
+        "name": "cve_2019_2725.py",
+        "from": "https://github.com/co0ontty/pocdb",
+        "up_time": "2024-09-02 04:17:08"
+    },
+    "938082c70ea13030ca0e68909f78e46f": {
+        "name": "apache_flink_rce.py",
+        "from": "https://github.com/co0ontty/pocdb",
+        "up_time": "2024-09-02 04:17:08"
+    },
+    "04ed52c346daa5a42b6973198848f534": {
+        "name": "maccms_backdoor.py",
+        "from": "https://github.com/co0ontty/pocdb",
+        "up_time": "2024-09-02 04:17:08"
+    },
+    "6b01ee1fc45906fb286b2cc31b331189": {
+        "name": "settings.py",
+        "from": "https://github.com/The-Cracker-Technology/pocsuite3",
+        "up_time": "2024-09-02 04:19:55"
     }
 }
