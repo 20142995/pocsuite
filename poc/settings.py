@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Copyright (c) 2014-2016 pocsuite developers (https://seebug.org)
+Copyright (c) 2014-2015 pocsuite developers (http://seebug.org)
 See the file 'docs/COPYING' for copying permission
 """
 
@@ -12,11 +12,10 @@ import time
 import sys
 
 from pocsuite.lib.core.revision import getRevisionNumber
-from pocsuite import __version__
 
-VERSION = __version__
+VERSION = "1.0.0dev"
 REVISION = getRevisionNumber()
-SITE = "http://pocsuite.org"
+SITE = "http://seebug.org"
 VERSION_STRING = "pocsuite/%s%s" % (VERSION, "-%s" % REVISION if REVISION else "-nongit-%s" % time.strftime("%Y%m%d", time.gmtime(os.path.getctime(__file__))))
 
 IS_WIN = subprocess.mswindows
@@ -25,7 +24,7 @@ PLATFORM = os.name
 PYVERSION = sys.version.split()[0]
 
 ISSUES_PAGE = "https://github.com/knownsec/Pocsuite/issues"
-GIT_REPOSITORY = "https://github.com/knownsec/Pocsuite.git"
+GIT_REPOSITORY = "git@github.com:knownsec/Pocsuite.git"
 GIT_PAGE = "https://github.com/knownsec/Pocsuite"
 
 LEGAL_DISCLAIMER = "Usage of pocsuite for attacking targets without prior mutual consent is illegal."
@@ -56,6 +55,7 @@ POC_IMPORTDICT = {
     "from pocsuite.net import": "from pocsuite.lib.request.basic import",
     "from pocsuite.poc import": "from pocsuite.lib.core.poc import",
     "from pocsuite.utils import register": "from pocsuite.lib.core.register import registerPoc as register",
+    "from pocsuite.lib": "from pocsuite.lib"
 }
 
 POC_REGISTER_STRING = "\nfrom pocsuite.api.poc import register\nregister({})"
@@ -91,10 +91,7 @@ PCS_OPTIONS = {
     'report': None,
     'proxy': None,
     'proxyCred': None,
-    'timeout': 5,
-    'quiet': False,
-    'requires': False,
-    'requiresFreeze': False
+    'timeout': 5
 }
 
 REPORT_TABLEBASE = """\
