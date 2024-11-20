@@ -211,7 +211,7 @@ if __name__ == '__main__':
         del data[md5]
     # 写入README.md
     readme_md = '## pocsuite (共{}个) 最近一次检查时间 {}\n'.format(
-        len(data.keys()), time.strftime("%Y-%m-%d %H:%M:%S"))
+        len(os.listdir(os.path.join(root_path, 'poc'))), time.strftime("%Y-%m-%d %H:%M:%S"))
     readme_md += '### 收集记录\n| 文件名称 | 收录时间 |\n| :----| :---- |\n'
     _data = sorted(data.values(), key=lambda x: x['up_time'], reverse=True)
     for item in _data:
