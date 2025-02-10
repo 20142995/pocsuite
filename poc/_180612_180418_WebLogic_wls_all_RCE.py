@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Author  : TideSec
+# @Author  : jeffzhang
 # @Time    : 2018/04/19
 # @File    : _180418_WebLogic_wls_all_RCE.py
 # @Desc    : "高危的Weblogic反序列化漏洞(CVE-2018-2628) 通过该漏洞 攻击者可以在未授权的情况下远程执行代码"
@@ -15,7 +15,7 @@ from pocsuite.api.poc import Output, POCBase
 class TestPOC(POCBase):
     vulID = '00003'
     version = '1'
-    author = 'TideSec'
+    author = 'jeffzhang'
     vulDate = '2018-04-19'
     createDate = '2018-04-20'
     updateDate = '2018-04-20'
